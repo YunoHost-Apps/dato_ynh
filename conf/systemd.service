@@ -1,0 +1,36 @@
+[Unit]
+Description=Dato: customizable app to create lists and databases
+After=network.target
+
+[Service]
+Type=simple
+Environment=NODE_ENV=production
+Environment=NODE_CONFIG_DIR=__FINALPATH__/config
+User=__APP__
+Group=__APP__
+Environment="__YNH_NODE_LOAD_PATH__"
+ExecStart=/bin/sh -c ' npm start'
+WorkingDirectory=__FINALPATH__/
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=__APP__
+Restart=always
+
+; Some security directives (inspired from peertube_ynh package)
+; Mount /usr, /boot, and /etc as read-only for processes invoked by this service.
+ProtectSystem=full
+; Sets up a new /dev mount for the process and only adds API pseudo devices
+; like /dev/null, /dev/zero or /dev/random but not physical devices. Disabled
+; by default because it may not work on devices like the Raspberry Pi.
+PrivateDevices=false
+; Ensures that the service process and all its children can never gain new
+; privileges through execve().
+NoNewPrivileges=true
+; This makes /home, /root, and /run/user inaccessible and empty for processes invoked
+; by this unit. Make sure that you do not depend on data inside these folders.
+ProtectHome=false
+; Drops the sys admin capability from the daemon.
+CapabilityBoundingSet=~CAP_SYS_ADMIN
+
+[Install]
+WantedBy=multi-user.target
