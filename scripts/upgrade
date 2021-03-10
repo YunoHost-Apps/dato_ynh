@@ -118,7 +118,6 @@ ynh_install_app_dependencies $pkg_dependencies
 #=================================================
 ynh_script_progression --message="Installing NodeJS..." --weight=15
 
-# Install Nodejs
 ynh_install_nodejs --nodejs_version=$nodejs_version
 
 #=================================================
