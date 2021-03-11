@@ -67,10 +67,14 @@ ynh_systemd_action --service_name=$app --action="stop" --log_path="/var/log/$app
 
 if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
-	ynh_script_progression --message="Upgrading source files..." --weight=3
-
 	# Download, check integrity, uncompress and patch the source from app.src
+	ynh_script_progression --message="Upgrading source files..." --weight=3
 	ynh_setup_source --dest_dir="$final_path"
+
+	# Regenerate config files removed in upgrade
+	ynh_script_progression --message="Regenerating dato config files..." --weight=3
+	dato_setup_config_files
+
 fi
 
 #=================================================
@@ -118,13 +122,6 @@ pushd "$final_path"
 popd
 
 #=================================================
-# GENERATE CONFIG FILES
-#=================================================
-ynh_script_progression --message="Generating dato config files..." --weight=3
-
-dato_setup_config_files
-
-#=================================================
 # SETUP SYSTEMD
 #=================================================
 ynh_script_progression --message="Upgrading systemd configuration..." --weight=1
@@ -136,6 +133,8 @@ ynh_add_systemd_config
 # VERIFY CONFIG FILES CHECKSUMS
 #=================================================
 ynh_script_progression --message="Verifying config files checksums..." --weight=2
+
+# TODO: not sure this section is doing what it should be doing, to check
 
 ### Verify the checksum of a file, stored by `ynh_store_file_checksum` in the install script.
 ### And create a backup of this file if the checksum is different. So the file will be backed up if the admin had modified it.
