@@ -118,7 +118,7 @@ yunohost service add $app --description="Data storage with a convenient and flex
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting a systemd service..." --weight=60
+ynh_script_progression --message="Starting dato app service and building pages..." --weight=60
 
 ynh_systemd_action --service_name=$app --action="start" --log_path="systemd" --line_match="electrode server listening on port"
 
