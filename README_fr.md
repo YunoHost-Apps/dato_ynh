@@ -46,6 +46,15 @@ Si vous voulez donner le droit à un utilisateur d'administrer (= d'ajouter/supp
 Si besoin, vous pouvez créer des liens pour permettre à un utilisateur de modifier son mot de passe. Il suffira alors d'envoyer ce lien manuellement à l'utilisateur.
 
 
+## Une note sur dato
+
+Dato est une application web progressive (PWA). En deux mots, cela veut dire que les navigateurs gardent en cache l'applcation entière, afin de ne pas avoir à la demander au serveur à chaque visite.
+Cela permet de moins soliciter le serveur, et d'utiliser l'application en l'absence de connexion internet.
+
+Quand l'application est mises à jour, le navigateur des utilisateurs détecte automatiquement la nouvelle version et propose de recharcher la page pour mettre à jour l'application. Cependant, certains navigateurs ne semblent pas toujours se rendre compte qu'une nouvelle version est disponible instantanément. Pour vérifier la version que vous utilisez, vous pouvez cliquer sur "?" (en haut à droite dans l'interface de dato), et choisir crédit pour y trouver le numéro de version actuellement installé.
+Vous pouvez aussi forcer une mise à jour de l'application depuis le serveur en ouvrant la page "about:serviceworker" dans votre navigateur, et en cliquant sur le bouton "unregister" du service du domaine sur lequel vous avez installé dato.
+
+
 ## Documentation
 
  * Documentation officielle : https://squeak.eauchat.org/dato/

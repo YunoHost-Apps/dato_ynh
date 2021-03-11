@@ -59,6 +59,15 @@ If you want a user to have administration rights (= to have the power to add/rem
 Also, if you need, you can make use of the password reset feature to allow users to modify their passwords, you will just need to send them the generated password reset link.
 
 
+## A note about dato
+
+Please be aware that dato is a Progressive Web App. In a nutshell, this means that browsers cache the whole app, so it doesn't have to be requested to the server every time a user is visiting it.
+This lowers solicitation of the server, and also allow users to use dato offline.
+
+When the app is upgraded, the user's browser will automatically detect that there is a new version, and propose to reload the page to update. However, sometimes it seems a bit random how browsers notice the new version, so if you want to make sure you're using the latest version, click on the "?" button (top-right in the web interface), and choose "credits" to verify the version you're using.
+You can also force reloading the app from the server opening "about:serviceworkers" in your browser and unregistering the worker for the domain in which you installed dato.
+
+
 ## Documentation
 
  * Official documentation: https://squeak.eauchat.org/dato/
