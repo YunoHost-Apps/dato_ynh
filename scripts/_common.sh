@@ -16,8 +16,8 @@ nodejs_version=12
 
 dato_setup_config_files() {
 
-  # create config directory
-  mkdir "$final_path/config/"
+  # create config directory (if it doesn't exist yet)
+  [ -d "$final_path/config/" ] || mkdir "$final_path/config/"
 
   # setup public dato config
   ynh_add_config --template="../conf/public.js" --destination="$final_path/config/public.js"
