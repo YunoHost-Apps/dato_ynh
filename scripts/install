@@ -202,6 +202,8 @@ if [[ $autosynchronize == true ]]; then
 	# display error message if there was an error creating dato admin user in couch
 	if [[ $curlResult != '{"ok":true,'* ]]; then
 		ynh_print_err --message="There was an error creating the dato admin user for in couch. You will probably have to do it manually (check the last section of this page for instructions: https://squeak.eauchat.org/apps/dato/?setups)."
+		ynh_print_err --message="Here is the error message from couchdb:"
+		ynh_print_err --message="$curlResult"
 		ynh_print_err --message="Please make sure that your couchdb instance is accessible from the url you provided, with a proper SSL certificate (not a self-signed one), otherwise you will not be able to login to dato!"
 		ynh_print_err --message="$curlResult"
 	fi
