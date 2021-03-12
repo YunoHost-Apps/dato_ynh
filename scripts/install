@@ -160,15 +160,6 @@ ynh_script_progression --message="Generating dato config files..." --weight=3
 dato_setup_config_files
 
 #=================================================
-# STORE THE CONFIG FILES CHECKSUM
-#=================================================
-ynh_script_progression --message="Storing config files checksums..." --weight=2
-
-# Calculate and store the config file checksum into the app settings
-ynh_store_file_checksum --file="$final_path/config/public.js"
-ynh_store_file_checksum --file="$final_path/config/private.js"
-
-#=================================================
 # CUSTOMIZE SETUP FOR AUTOSYNCHRONIZATION
 #=================================================
 
@@ -181,9 +172,6 @@ if [[ $autosynchronize == true ]]; then
 
 	# make sure that couchdb has CORS enabled and that it accepts requests from dato domain
 	ynh_add_config --template="../conf/couch.ini" --destination="/opt/couchdb/etc/local.d/$app.ini"
-	ynh_replace_string --match_string="{{{domain}}}" --replace_string="$domain" --target_file="/opt/couchdb/etc/local.d/$app.ini"
-
-	ynh_store_file_checksum --file="/opt/couchdb/etc/local.d/$app.ini"
 
 	#=================================================
 	# SETUP A COUCHDB DATO ADMIN USER
@@ -202,6 +190,8 @@ if [[ $autosynchronize == true ]]; then
 	# display error message if there was an error creating dato admin user in couch
 	if [[ $curlResult != '{"ok":true,'* ]]; then
 		ynh_print_err --message="There was an error creating the dato admin user for in couch. You will probably have to do it manually (check the last section of this page for instructions: https://squeak.eauchat.org/apps/dato/?setups)."
+		ynh_print_err --message="Here is the error message from couchdb:"
+		ynh_print_err --message="$curlResult"
 		ynh_print_err --message="Please make sure that your couchdb instance is accessible from the url you provided, with a proper SSL certificate (not a self-signed one), otherwise you will not be able to login to dato!"
 		ynh_print_err --message="$curlResult"
 	fi
@@ -239,10 +229,10 @@ yunohost service add $app --description="Data storage with a convenient and flex
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting a systemd service..." --weight=60
+ynh_script_progression --message="Starting dato app service and building pages..." --weight=60
 
-# Start a systemd service
-ynh_systemd_action --service_name=$app --action="start" --log_path="systemd" --line_match="electrode server listening on port"
+# Start a systemd service (increased timeout, because on some systems the pages could take quite some time to build?)
+ynh_systemd_action --service_name=$app --action="start" --log_path="systemd" --line_match="electrode server listening on port" --timeout=600
 
 #=================================================
 # SETUP FAIL2BAN

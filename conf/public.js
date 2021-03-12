@@ -1,7 +1,7 @@
 
 module.exports = {
 
-  adminEmail: "{{{admin_email}}}",
+  adminEmail: "__ADMIN_EMAIL__",
 
   otherOptionsThanLogin: [
     "If you have no dato account, you should request one to the administrator of this server.",
