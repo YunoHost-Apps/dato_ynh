@@ -6,18 +6,18 @@ module.exports = {
   debug: false,
   refreshServiceWorkerScriptAtEachRequest: false,
 
-  port: "{{{port}}}",
+  port: "__PORT__",
 
   authentication: {
-    couchUrl: "{{{couch_url}}}",
+    couchUrl: "__COUCH_URL__",
   },
   couchAdminAuthentication: {
     // couch admin user:
-    username: "{{{couch_admin_name}}}",
+    username: "__COUCH_ADMIN_NAME__",
     // couch admin user's password:
-    password: "{{{couch_admin_password}}}",
+    password: "__COUCH_ADMIN_PASSWORD__",
     // the url where your couchdb server is accessible from the internet:
-    customCouchUrl: "{{{couch_url}}}",
+    customCouchUrl: "__COUCH_URL__",
   },
 
 };

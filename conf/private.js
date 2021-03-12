@@ -6,6 +6,6 @@ module.exports = {
   debug: false,
   refreshServiceWorkerScriptAtEachRequest: false,
 
-  port: "{{{port}}}",
+  port: "__PORT__",
 
 };

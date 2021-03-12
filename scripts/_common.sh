@@ -25,21 +25,8 @@ dato_setup_config_files() {
   # setup private dato config
   if [[ $autosynchronize == true ]]; then
   	ynh_add_config --template="../conf/private-autosync.js" --destination="$final_path/config/private.js"
-  	# setup couch url, admin name and password
-  	ynh_replace_string --match_string="{{{couch_url}}}" --replace_string="$couch_url" --target_file="$final_path/config/private.js"
-  	ynh_replace_string --match_string="{{{couch_admin_name}}}" --replace_string="$couch_admin_name" --target_file="$final_path/config/private.js"
-  	ynh_replace_string --match_string="{{{couch_admin_password}}}" --replace_string="$couch_admin_password" --target_file="$final_path/config/private.js"
   else
   	ynh_add_config --template="../conf/private.js" --destination="$final_path/config/private.js"
-  fi
-  # setup port to use
-  ynh_replace_string --match_string="{{{port}}}" --replace_string="$port" --target_file="$final_path/config/private.js"
-
-  # add admin email to public config if it was set
-  if [[ $admin_email != "none" ]]; then
-  	ynh_replace_string --match_string="{{{admin_email}}}" --replace_string="$admin_email" --target_file="$final_path/config/public.js"
-  else
-  	ynh_replace_string --match_string="{{{admin_email}}}" --replace_string="" --target_file="$final_path/config/public.js"
   fi
 
 }

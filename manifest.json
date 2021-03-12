@@ -121,12 +121,12 @@
         "name": "admin_email",
         "type": "string",
         "ask": {
-          "en": "If you want the dato administrator email to be displayed in login page, so that users can contact you to create accounts... you can set your email here. Otherwise leave this to 'none'. (only if autosynchronization is enabled)",
-          "fr": "Si tu souhaites que l'email de l'administrateur de dato soit visible sur la page de login, afin que les utilisateurs puissent le contacter pour des demandes de compte... tu peux le spécifier ici. Sinon, choisis 'none'. (nécessaire uniquement si l'autosynchronisation a été activée)"
+          "en": "If you want the dato administrator email to be displayed in login page, so that users can contact you to create accounts... you can set your email here. Otherwise leave this empty. (only useful if autosynchronization is enabled)",
+          "fr": "Si tu souhaites que l'email de l'administrateur de dato soit visible sur la page de login, afin que les utilisateurs puissent le contacter pour des demandes de compte... tu peux le spécifier ici. Sinon, laisser ce champ vide. (utile uniquement si l'autosynchronisation a été activée)"
         },
         "example": "datoadmin((at))domain.tld",
         "optional": true,
-        "default" : "none"
+        "default" : ""
       }
     ]
   }

@@ -181,7 +181,6 @@ if [[ $autosynchronize == true ]]; then
 
 	# make sure that couchdb has CORS enabled and that it accepts requests from dato domain
 	ynh_add_config --template="../conf/couch.ini" --destination="/opt/couchdb/etc/local.d/$app.ini"
-	ynh_replace_string --match_string="{{{domain}}}" --replace_string="$domain" --target_file="/opt/couchdb/etc/local.d/$app.ini"
 
 	ynh_store_file_checksum --file="/opt/couchdb/etc/local.d/$app.ini"
 
