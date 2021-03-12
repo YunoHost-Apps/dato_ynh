@@ -46,7 +46,7 @@ Si vous voulez donner le droit à un utilisateur d'administrer (= d'ajouter/supp
 Si besoin, vous pouvez créer des liens pour permettre à un utilisateur de modifier son mot de passe. Il suffira alors d'envoyer ce lien manuellement à l'utilisateur.
 
 
-## Une note sur dato
+## Note sur dato
 
 Dato est une application web progressive (PWA). En deux mots, cela veut dire que les navigateurs gardent en cache l'applcation entière, afin de ne pas avoir à la demander au serveur à chaque visite.
 Cela permet de moins soliciter le serveur, et d'utiliser l'application en l'absence de connexion internet.
