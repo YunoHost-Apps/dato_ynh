@@ -231,8 +231,8 @@ yunohost service add $app --description="Data storage with a convenient and flex
 #=================================================
 ynh_script_progression --message="Starting dato app service and building pages..." --weight=60
 
-# Start a systemd service
-ynh_systemd_action --service_name=$app --action="start" --log_path="systemd" --line_match="electrode server listening on port"
+# Start a systemd service (increased timeout, because on some systems the pages could take quite some time to build?)
+ynh_systemd_action --service_name=$app --action="start" --log_path="systemd" --line_match="electrode server listening on port" --timeout=600
 
 #=================================================
 # SETUP FAIL2BAN

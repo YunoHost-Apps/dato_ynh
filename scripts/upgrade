@@ -158,7 +158,7 @@ yunohost service add $app --description="Data storage with a convenient and flex
 #=================================================
 ynh_script_progression --message="Starting dato app service and building pages..." --weight=60
 
-ynh_systemd_action --service_name=$app --action="start" --log_path="systemd" --line_match="electrode server listening on port"
+ynh_systemd_action --service_name=$app --action="start" --log_path="systemd" --line_match="electrode server listening on port" --timeout=600
 
 # #=================================================
 # # UPGRADE FAIL2BAN
