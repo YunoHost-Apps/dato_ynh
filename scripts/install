@@ -160,15 +160,6 @@ ynh_script_progression --message="Generating dato config files..." --weight=3
 dato_setup_config_files
 
 #=================================================
-# STORE THE CONFIG FILES CHECKSUM
-#=================================================
-ynh_script_progression --message="Storing config files checksums..." --weight=2
-
-# Calculate and store the config file checksum into the app settings
-ynh_store_file_checksum --file="$final_path/config/public.js"
-ynh_store_file_checksum --file="$final_path/config/private.js"
-
-#=================================================
 # CUSTOMIZE SETUP FOR AUTOSYNCHRONIZATION
 #=================================================
 
@@ -181,8 +172,6 @@ if [[ $autosynchronize == true ]]; then
 
 	# make sure that couchdb has CORS enabled and that it accepts requests from dato domain
 	ynh_add_config --template="../conf/couch.ini" --destination="/opt/couchdb/etc/local.d/$app.ini"
-
-	ynh_store_file_checksum --file="/opt/couchdb/etc/local.d/$app.ini"
 
 	#=================================================
 	# SETUP A COUCHDB DATO ADMIN USER
