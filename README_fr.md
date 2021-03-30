@@ -33,7 +33,7 @@ Dato est une application web progressive, ce qui veut dire que vous pouvez l'ins
 
 ## Configuration
 
-Cette application peut être customisée en modificant le fichier `config/public.js` situé dans `/vim/opt/yunohost/APPID/` (`APPID` devrait-être `dato` pour une première instance et puis, `dato__2`, `dato__3`... pour les suivantes).
+Cette application peut être customisée en modificant le fichier `config/public.js` situé dans `/opt/yunohost/APPID/` (`APPID` devrait-être `dato` pour une première instance et puis, `dato__2`, `dato__3`... pour les suivantes).
 Il est aussi possible de modifier `config/private.js`, mais à vos risques et périls.
 
 

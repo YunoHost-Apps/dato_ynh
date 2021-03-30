@@ -37,7 +37,7 @@ Dato is a progressive webapp, which means that you can install it from the brows
 
 ## Configuration
 
-To configure dato, you can edit the `config/public.js` file in the app directory that should be in `/vim/opt/yunohost/APPID/` where `APPID` is `dato` if it's the first installed instance, `dato__2`, `dato__3`... for additional instances.
+To configure dato, you can edit the `config/public.js` file in the app directory that should be in `/opt/yunohost/APPID/` where `APPID` is `dato` if it's the first installed instance, `dato__2`, `dato__3`... for additional instances.
 You can also make modifications in `config/private.js`, but be sure to know what you're doing when doing so.
 
 
