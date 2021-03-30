@@ -28,7 +28,7 @@ Dato est une application web progressive, ce qui veut dire que vous pouvez l'ins
 
 ## Démo
 
-* [Démo officielle](https://publicdato.eauchat.org/)
+[Démo officielle](https://publicdato.eauchat.org/)
 
 
 ## Configuration

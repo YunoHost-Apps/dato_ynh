@@ -32,7 +32,7 @@ Dato is a progressive webapp, which means that you can install it from the brows
 
 ## Demo
 
-* [Official demo](https://publicdato.eauchat.org/)
+[Official demo](https://publicdato.eauchat.org/)
 
 
 ## Configuration
