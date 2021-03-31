@@ -6,7 +6,7 @@
     "en": "Store all kinds of data with an extremely customizable interface.",
     "fr": "Stockez tous types de données avec une interface complètement customizable."
   },
-  "version": "1.5.11~ynh1",
+  "version": "1.5.11~ynh2",
   "url": "https://squeak.eauchat.org/dato",
   "license": "AGPL-3.0-or-later",
   "maintainer": {
@@ -62,7 +62,7 @@
         "name": "autosync_info",
         "type": "display_text",
         "ask": {
-          "en": "All the following option are useful only if you chose to enable autosynchronization. You can skip them all if you didn't.",
+          "en": "All the following options are useful only if you chose to enable autosynchronization. You can skip them all if you didn't.",
           "fr": "Les options qui suivent ne sont utiles que si vous avez choisi d'activer l'autosynchronisation. Vous pouvez toutes les ignorer si ce n'est pas le cas."
         }
       },
