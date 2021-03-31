@@ -62,7 +62,7 @@
         "name": "autosync_info",
         "type": "display_text",
         "ask": {
-          "en": "All the following option are useful only if you chose to enable autosynchronization. You can skip them all if you didn't.",
+          "en": "All the following options are useful only if you chose to enable autosynchronization. You can skip them all if you didn't.",
           "fr": "Les options qui suivent ne sont utiles que si vous avez choisi d'activer l'autosynchronisation. Vous pouvez toutes les ignorer si ce n'est pas le cas."
         }
       },
