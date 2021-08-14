@@ -19,6 +19,8 @@
 		setup_private=1
 		setup_public=1
 		upgrade=1
+		# 1.5.11~ynh2
+		upgrade=1	from_commit=b127adc6bf773afd1bc2ee7cead36c91c4fded60
 		backup_restore=1
 		multi_instance=1
 		port_already_use=1
@@ -26,3 +28,6 @@
 ;;; Options
 Email=squeak@eauchat.org
 Notification=none
+;;; Upgrade options
+	; commit=b127adc6bf773afd1bc2ee7cead36c91c4fded60
+		name=1.5.11~ynh2.
