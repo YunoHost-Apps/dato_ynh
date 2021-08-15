@@ -14,10 +14,7 @@ source /usr/share/yunohost/helpers
 #=================================================
 
 ynh_clean_setup () {
-	# to handle ynh_systemd_action problems
 	ynh_clean_check_starting
-	### Remove this function if there's nothing to clean before calling the remove script.
-	true
 }
 # Exit if an error occurs during the execution of the script
 ynh_abort_if_errors
@@ -26,11 +23,11 @@ ynh_abort_if_errors
 # RETRIEVE ARGUMENTS FROM THE MANIFEST
 #=================================================
 
-app=$YNH_APP_INSTANCE_NAME
-
 domain=$YNH_APP_ARG_DOMAIN
 path_url="/" # not customizable, so not using: path_url=$YNH_APP_ARG_PATH
 is_public=$YNH_APP_ARG_IS_PUBLIC
+
+app=$YNH_APP_INSTANCE_NAME
 
 # autosynchronization variables
 autosynchronize=$YNH_APP_ARG_AUTOSYNCHRONIZE
@@ -97,12 +94,15 @@ ynh_script_progression --message="Installing dependencies..." --weight=6
 
 ynh_install_app_dependencies $pkg_dependencies
 
-#=================================================
-# INSTALL NODEJS
-#=================================================
-ynh_script_progression --message="Installing NodeJS..." --weight=15
-
 ynh_install_nodejs --nodejs_version=$nodejs_version
+
+#=================================================
+# CREATE DEDICATED USER
+#=================================================
+ynh_script_progression --message="Configuring system user..." --weight=1
+
+# Create a system user
+ynh_system_user_create --username=$app --home_dir=$final_path
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -110,7 +110,7 @@ ynh_install_nodejs --nodejs_version=$nodejs_version
 ynh_script_progression --message="Setting up source files..." --weight=2
 
 ynh_app_setting_set --app=$app --key=final_path --value=$final_path
-# Download, check integrity, uncompress and patch the source from conf/app.src
+# Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source --dest_dir="$final_path"
 
 #=================================================
@@ -120,14 +120,6 @@ ynh_script_progression --message="Configuring NGINX web server..." --weight=1
 
 # Create a dedicated NGINX config
 ynh_add_nginx_config
-
-#=================================================
-# CREATE DEDICATED USER
-#=================================================
-ynh_script_progression --message="Configuring system user..." --weight=1
-
-# Create a system user
-ynh_system_user_create --username=$app --home_dir=$final_path
 
 #=================================================
 # SPECIFIC SETUP
@@ -150,7 +142,7 @@ popd
 ynh_script_progression --message="Configuring a systemd service..." --weight=2
 
 # Create a dedicated systemd config
-ynh_add_systemd_config --others_var="ynh_node_load_PATH"
+ynh_add_systemd_config
 
 #=================================================
 # GENERATE CONFIG FILES
@@ -227,24 +219,10 @@ yunohost service add $app --description="Data storage with a convenient and flex
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting dato app service and building pages..." --weight=60
+ynh_script_progression --message="Starting a systemd service..." --weight=60
 
-# Start a systemd service (increased timeout, because on some systems the pages could take quite some time to build?)
+# Start a systemd service
 ynh_systemd_action --service_name=$app --action="start" --log_path="systemd" --line_match="electrode server listening on port" --timeout=600
-
-#=================================================
-# SETUP FAIL2BAN
-#=================================================
-# ynh_script_progression --message="Configuring Fail2Ban..." --weight=1
-#
-# if [[ $autosynchronize == true ]]; then
-# 	# Create a dedicated Fail2Ban config
-# 	ynh_add_fail2ban_config --logpath="/var/log/nginx/${domain}-error.log" --failregex="Regex to match into the log for a failed login"
-# fi
-#
-# TODO: would be nice to setup fail2ban, but don't know how to make it work to check logs from systemd
-# tried `--logpath="systemd"` but didn't work
-# if enabled, should also enable corresponding parts in remove, restore, backup and upgrade scripts
 
 #=================================================
 # SETUP SSOWAT
