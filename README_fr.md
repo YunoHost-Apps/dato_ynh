@@ -37,6 +37,16 @@ Cette application peut être personnalisée en modifiant le fichier `config/publ
 Il est aussi possible de modifier `config/private.js`, mais à vos risques et périls.
 
 
+## Autosynchronisation
+
+Par défaut toutes les données que vous créez dans dato ne sont stockées que dans votre navigateur. L'utilisateur peut manuellement mettre en place des synchronisations pour chaque base de données vers n'importe quel serveur couchdb, mais ce n'est pas un processus évident pour l'utilisateur. Dato propose donc un mécanisme d'autosynchronisation.
+Pour l'activer, il vous faut mettre en place un serveur couchdb (vous pouvez faire cela en utiisant le [paquet yunohost couchdb](https://github.com/YunoHost-Apps/couchdb_ynh)). Vous devez faire cela avant d'installer dato.
+Ensuite, lors de l'installation de dato, renseignez l'url de votre serveur couchdb quand c'est demandé (vous devrez également renseigner votre mot de passe d'administration de couchdb, et les informations de l'administrateur de dato à créer). Dato créera l'utilisateur d'administration ce qui vous permettra d'ajouter des utilisateurs en suivant les instructions ci-dessous.
+Notez que vous pouvez installer couchdb sur un autre serveur que celui qui héberge dato, mais vous devrez activer CORS et éditer le document de sécurité de la base de donnée _users de couchdb manuellement. Consultez [cette page](https://squeak.eauchat.org/apps/dato/?setups) pour plus de détails sur comment faire cela.
+
+Si vous souhaitez utiliser dato avec et sans autosynchronisation simultanément pour différents utilisateurs, vous pouvez installer l'application plusieurs fois avec différentes configurations.
+
+
 ## Ajouter des utilisateurs
 
 Si vous activez l'autosynchronisation, les utilisateurs auront besoin d'un compte pour utiliser l'application. Dato ne supporte pas LDAP pour le moment, vous devrez donc ajouter des utilisateurs séparément dans sa base de données.

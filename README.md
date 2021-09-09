@@ -46,6 +46,7 @@ You can also make modifications in `config/private.js`, but be sure to know what
 By default all data you create with dato is stored only in your browser. Users can manually enable per-database synchronization with any remote couch server, but this process is not obvious to users. Therefore dato provide an autosynchronization mechanism.
 To enable it, you need to setup a couchdb server (you can do this using the [couchdb yunohost package](https://github.com/YunoHost-Apps/couchdb_ynh)). You should do this before installing dato.
 Then when installing dato, set the url to your couchdb server when prompted (you will also need to fill your couchdb admin password, and info about the dato admin user to create). Dato will automatically setup the dato administrator account in your couchdb server. You can then easily add users from the user interface, as specified below.
+Please note that you can install couchdb in a different server than dato, but you'll have to enable CORS and edit the _users security document of you couchdb server manually. Check [this page](https://squeak.eauchat.org/apps/dato/?setups) for details on how to do all that.
 
 If you want to allow both a free usage of the app by anyone, and autosynchronization for some users, you can install the dato package multiple times with different setups.
 
