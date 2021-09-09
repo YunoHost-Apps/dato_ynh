@@ -80,8 +80,8 @@ Pour le moment, dato a besoin d'un domaine/sous-domaine complet et ne peut être
 ## Liens
 
  * Signaler un bug : https://github.com/YunoHost-Apps/dato_ynh/issues
- * Site de l'application : Lien vers le site officiel de cette application.
- * Dépôt de l'application principale : Lien vers le dépôt officiel de l'application principale.
+ * Site de l'application : https://squeak.eauchat.org/dato/
+ * Dépôt de l'application principale : https://framagit.org/squeak/dato/
  * Site web YunoHost : https://yunohost.org/
 
 ---

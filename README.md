@@ -93,8 +93,8 @@ For now, dato needs a full domain, it doesn't support being set to a subpath.
 ## Links
 
  * Report a bug: https://github.com/YunoHost-Apps/dato_ynh/issues
- * App website: Link to the official website of this app.
- * Upstream app repository: Link to the official repository of the upstream app.
+ * App website: https://squeak.eauchat.org/dato/
+ * Upstream app repository: https://framagit.org/squeak/dato/
  * YunoHost website: https://yunohost.org/
 
 ---
