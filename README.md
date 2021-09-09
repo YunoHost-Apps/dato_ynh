@@ -41,7 +41,7 @@ To configure dato, you can edit the `config/public.js` file in the app directory
 You can also make modifications in `config/private.js`, but be sure to know what you're doing when doing so.
 
 
-## Autosynchronization
+## Autosynchronisation
 
 By default all data you create with dato is stored only in your browser. Users can manually enable per-database synchronization with any remote couch server, but this process is not obvious to users. Therefore dato provide an autosynchronization mechanism.  
 To enable it, you need to setup a couchdb server (you can do this using the [couchdb yunohost package](https://github.com/YunoHost-Apps/couchdb_ynh)). You should do this before installing dato.  
