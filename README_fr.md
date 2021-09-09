@@ -18,7 +18,7 @@ Le but de dato n'est pas de proposer l'interface idéale pour chaque outil, mais
 
 Dato est une application web progressive, ce qui veut dire que vous pouvez l'installer sur ordinateur et téléphone facilement et l'utiliser hors connexion.
 
-**Version incluse :** 1.5.16
+**Version incluse :** 1.5.17
 
 
 ## Captures d'écran
@@ -35,6 +35,16 @@ Dato est une application web progressive, ce qui veut dire que vous pouvez l'ins
 
 Cette application peut être personnalisée en modifiant le fichier `config/public.js` situé dans `/opt/yunohost/APPID/` (`APPID` devrait-être `dato` pour une première instance et puis, `dato__2`, `dato__3`... pour les suivantes).
 Il est aussi possible de modifier `config/private.js`, mais à vos risques et périls.
+
+
+## Autosynchronisation
+
+Par défaut toutes les données que vous créez dans dato ne sont stockées que dans votre navigateur. L'utilisateur peut manuellement mettre en place des synchronisations pour chaque base de données vers n'importe quel serveur couchdb, mais ce n'est pas un processus évident pour l'utilisateur. Dato propose donc un mécanisme d'autosynchronisation.
+Pour l'activer, il vous faut mettre en place un serveur couchdb (vous pouvez faire cela en utiisant le [paquet yunohost couchdb](https://github.com/YunoHost-Apps/couchdb_ynh)). Vous devez faire cela avant d'installer dato.
+Ensuite, lors de l'installation de dato, renseignez l'url de votre serveur couchdb quand c'est demandé (vous devrez également renseigner votre mot de passe d'administration de couchdb, et les informations de l'administrateur de dato à créer). Dato créera l'utilisateur d'administration ce qui vous permettra d'ajouter des utilisateurs en suivant les instructions ci-dessous.
+Notez que vous pouvez installer couchdb sur un autre serveur que celui qui héberge dato, mais vous devrez activer CORS et éditer le document de sécurité de la base de donnée _users de couchdb manuellement. Consultez [cette page](https://squeak.eauchat.org/apps/dato/?setups) pour plus de détails sur comment faire cela.
+
+Si vous souhaitez utiliser dato avec et sans autosynchronisation simultanément pour différents utilisateurs, vous pouvez installer l'application plusieurs fois avec différentes configurations.
 
 
 ## Ajouter des utilisateurs
@@ -80,8 +90,8 @@ Pour le moment, dato a besoin d'un domaine/sous-domaine complet et ne peut être
 ## Liens
 
  * Signaler un bug : https://github.com/YunoHost-Apps/dato_ynh/issues
- * Site de l'application : Lien vers le site officiel de cette application.
- * Dépôt de l'application principale : Lien vers le dépôt officiel de l'application principale.
+ * Site de l'application : https://squeak.eauchat.org/dato/
+ * Dépôt de l'application principale : https://framagit.org/squeak/dato/
  * Site web YunoHost : https://yunohost.org/
 
 ---

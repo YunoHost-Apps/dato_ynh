@@ -22,7 +22,7 @@ The purpose of dato is not to propose a UI specific to some purpose, but somethi
 
 Dato is a progressive webapp, which means that you can install it from the browser in computer and phones, and use it offline.
 
-**Shipped version:** 1.5.16
+**Shipped version:** 1.5.17
 
 
 ## Screenshots
@@ -46,6 +46,7 @@ You can also make modifications in `config/private.js`, but be sure to know what
 By default all data you create with dato is stored only in your browser. Users can manually enable per-database synchronization with any remote couch server, but this process is not obvious to users. Therefore dato provide an autosynchronization mechanism.
 To enable it, you need to setup a couchdb server (you can do this using the [couchdb yunohost package](https://github.com/YunoHost-Apps/couchdb_ynh)). You should do this before installing dato.
 Then when installing dato, set the url to your couchdb server when prompted (you will also need to fill your couchdb admin password, and info about the dato admin user to create). Dato will automatically setup the dato administrator account in your couchdb server. You can then easily add users from the user interface, as specified below.
+Please note that you can install couchdb in a different server than dato, but you'll have to enable CORS and edit the _users security document of you couchdb server manually. Check [this page](https://squeak.eauchat.org/apps/dato/?setups) for details on how to do all that.
 
 If you want to allow both a free usage of the app by anyone, and autosynchronization for some users, you can install the dato package multiple times with different setups.
 
@@ -93,8 +94,8 @@ For now, dato needs a full domain, it doesn't support being set to a subpath.
 ## Links
 
  * Report a bug: https://github.com/YunoHost-Apps/dato_ynh/issues
- * App website: Link to the official website of this app.
- * Upstream app repository: Link to the official repository of the upstream app.
+ * App website: https://squeak.eauchat.org/dato/
+ * Upstream app repository: https://framagit.org/squeak/dato/
  * YunoHost website: https://yunohost.org/
 
 ---

@@ -165,6 +165,9 @@ if [[ $autosynchronize == true ]]; then
 	# make sure that couchdb has CORS enabled and that it accepts requests from dato domain
 	ynh_add_config --template="../conf/couch.ini" --destination="/opt/couchdb/etc/local.d/$app.ini"
 
+	# restart couchdb service so that it takes into consideration the changes
+	yunohost service restart couchdb
+
 	#=================================================
 	# SETUP A COUCHDB DATO ADMIN USER
 	#=================================================
@@ -187,20 +190,20 @@ if [[ $autosynchronize == true ]]; then
 		ynh_print_err --message="Please make sure that your couchdb instance is accessible from the url you provided, with a proper SSL certificate (not a self-signed one), otherwise you will not be able to login to dato!"
 	fi
 
-		# modify _users db _security document
-		usersSecDoc=$(curl -X GET "$couch_pw_url/_users/_security")
-		usersSecDocModified=$(echo $usersSecDoc | jq '.members.roles += ["dato", "dato-admin"]')
-		usersSecDocChange_curlResult=$(curl -X PUT "$couch_pw_url/_users/_security" \
-	     -H "Accept: application/json" \
-	     -H "Content-Type: application/json" \
-	     -d "$usersSecDocModified" 2> /dev/null)
+	# modify _users db _security document
+	usersSecDoc=$(curl -X GET "$couch_pw_url/_users/_security")
+	usersSecDocModified=$(echo $usersSecDoc | jq '.members.roles += ["dato", "dato-admin"]')
+	usersSecDocChange_curlResult=$(curl -X PUT "$couch_pw_url/_users/_security" \
+     -H "Accept: application/json" \
+     -H "Content-Type: application/json" \
+     -d "$usersSecDocModified" 2> /dev/null)
 
-		 # display error message if there was an error modifying _users db _security document
-	 	if [[ $usersSecDocChange_curlResult != '{"ok":true,'* ]]; then
-	 		ynh_print_err --message="There was an error enabling dato users to access their user profile in couch. You will have to do it manually (check the 'Configure couchdb so that it accepts requests from dato' section in the following page for instructions: https://squeak.eauchat.org/apps/dato/?setups)."
-	 		ynh_print_err --message="Here is the error message from couchdb:"
-	 		ynh_print_err --message="$usersSecDocChange_curlResult"
-	 	fi
+	# display error message if there was an error modifying _users db _security document
+	if [[ $usersSecDocChange_curlResult != '{"ok":true,'* ]]; then
+		ynh_print_err --message="There was an error enabling dato users to access their user profile in couch. You will have to do it manually (check the 'Configure couchdb so that it accepts requests from dato' section in the following page for instructions: https://squeak.eauchat.org/apps/dato/?setups)."
+		ynh_print_err --message="Here is the error message from couchdb:"
+		ynh_print_err --message="$usersSecDocChange_curlResult"
+	fi
 
 fi
 
