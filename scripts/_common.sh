@@ -5,7 +5,7 @@
 #=================================================
 
 # dependencies used by the app
-pkg_dependencies="curl"
+pkg_dependencies="curl jq"
 
 # nodejs version
 nodejs_version=12
