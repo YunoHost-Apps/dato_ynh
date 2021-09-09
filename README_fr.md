@@ -39,9 +39,9 @@ Il est aussi possible de modifier `config/private.js`, mais à vos risques et p�
 
 ## Autosynchronisation
 
-Par défaut toutes les données que vous créez dans dato ne sont stockées que dans votre navigateur. L'utilisateur peut manuellement mettre en place des synchronisations pour chaque base de données vers n'importe quel serveur couchdb, mais ce n'est pas un processus évident pour l'utilisateur. Dato propose donc un mécanisme d'autosynchronisation.
-Pour l'activer, il vous faut mettre en place un serveur couchdb (vous pouvez faire cela en utiisant le [paquet yunohost couchdb](https://github.com/YunoHost-Apps/couchdb_ynh)). Vous devez faire cela avant d'installer dato.
-Ensuite, lors de l'installation de dato, renseignez l'url de votre serveur couchdb quand c'est demandé (vous devrez également renseigner votre mot de passe d'administration de couchdb, et les informations de l'administrateur de dato à créer). Dato créera l'utilisateur d'administration ce qui vous permettra d'ajouter des utilisateurs en suivant les instructions ci-dessous.
+Par défaut toutes les données que vous créez dans dato ne sont stockées que dans votre navigateur. L'utilisateur peut manuellement mettre en place des synchronisations pour chaque base de données vers n'importe quel serveur couchdb, mais ce n'est pas un processus évident pour l'utilisateur. Dato propose donc un mécanisme d'autosynchronisation.  
+Pour l'activer, il vous faut mettre en place un serveur couchdb (vous pouvez faire cela en utiisant le [paquet yunohost couchdb](https://github.com/YunoHost-Apps/couchdb_ynh)). Vous devez faire cela avant d'installer dato.  
+Ensuite, lors de l'installation de dato, renseignez l'url de votre serveur couchdb quand c'est demandé (vous devrez également renseigner votre mot de passe d'administration de couchdb, et les informations de l'administrateur de dato à créer). Dato créera l'utilisateur d'administration ce qui vous permettra d'ajouter des utilisateurs en suivant les instructions ci-dessous.  
 Notez que vous pouvez installer couchdb sur un autre serveur que celui qui héberge dato, mais vous devrez activer CORS et éditer le document de sécurité de la base de donnée _users de couchdb manuellement. Consultez [cette page](https://squeak.eauchat.org/apps/dato/?setups) pour plus de détails sur comment faire cela.
 
 Si vous souhaitez utiliser dato avec et sans autosynchronisation simultanément pour différents utilisateurs, vous pouvez installer l'application plusieurs fois avec différentes configurations.
@@ -49,8 +49,8 @@ Si vous souhaitez utiliser dato avec et sans autosynchronisation simultanément 
 
 ## Ajouter des utilisateurs
 
-Si vous activez l'autosynchronisation, les utilisateurs auront besoin d'un compte pour utiliser l'application. Dato ne supporte pas LDAP pour le moment, vous devrez donc ajouter des utilisateurs séparément dans sa base de données.
-Pour ajouter un utilisateur, il suffit de visiter la page `/users/` (https://dato.yourdomain.tld/users/), créer un nouvel utilisateur, et ne pas oublier de cliquer sur "roles" et d'ajouter le rôle `dato`.
+Si vous activez l'autosynchronisation, les utilisateurs auront besoin d'un compte pour utiliser l'application. Dato ne supporte pas LDAP pour le moment, vous devrez donc ajouter des utilisateurs séparément dans sa base de données.  
+Pour ajouter un utilisateur, il suffit de visiter la page `/users/` (https://dato.yourdomain.tld/users/), créer un nouvel utilisateur, et ne pas oublier de cliquer sur "roles" et d'ajouter le rôle `dato`.  
 Si vous voulez donner le droit à un utilisateur d'administrer (= d'ajouter/supprimer des utilisateurs), il suffit de lui donner additionnellement, le rôle `dato-admin`.
 
 Si besoin, vous pouvez créer des liens pour permettre à un utilisateur de modifier son mot de passe. Il suffira alors d'envoyer ce lien manuellement à l'utilisateur.
@@ -58,10 +58,10 @@ Si besoin, vous pouvez créer des liens pour permettre à un utilisateur de modi
 
 ## Note sur dato
 
-Dato est une application web progressive (PWA). En deux mots, cela veut dire que les navigateurs gardent en cache l'application entière, afin de ne pas avoir à la demander au serveur à chaque visite.
+Dato est une application web progressive (PWA). En deux mots, cela veut dire que les navigateurs gardent en cache l'application entière, afin de ne pas avoir à la demander au serveur à chaque visite.  
 Cela permet de moins soliciter le serveur, et d'utiliser l'application en l'absence de connexion internet.
 
-Quand l'application est mise à jour, le navigateur des utilisateurs détecte automatiquement la nouvelle version et propose de recharcher la page pour mettre à jour l'application. Cependant, certains navigateurs ne semblent pas toujours se rendre compte qu'une nouvelle version est disponible instantanément. Pour vérifier la version que vous utilisez, vous pouvez cliquer sur "?" (en haut à droite dans l'interface de dato), et choisir "crédit" pour y trouver le numéro de version actuellement installé.
+Quand l'application est mise à jour, le navigateur des utilisateurs détecte automatiquement la nouvelle version et propose de recharcher la page pour mettre à jour l'application. Cependant, certains navigateurs ne semblent pas toujours se rendre compte qu'une nouvelle version est disponible instantanément. Pour vérifier la version que vous utilisez, vous pouvez cliquer sur "?" (en haut à droite dans l'interface de dato), et choisir "crédit" pour y trouver le numéro de version actuellement installé.  
 Vous pouvez aussi forcer une mise à jour de l'application depuis le serveur en ouvrant la page "about:serviceworker" dans votre navigateur, et en cliquant sur le bouton "unregister" du service du domaine sur lequel vous avez installé dato.
 
 
