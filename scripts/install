@@ -183,7 +183,7 @@ if [[ $autosynchronize == true ]]; then
      -d "{\"name\": \"$couch_datoadmin_name\", \"password\": \"$couch_datoadmin_password\", \"roles\": [\"dato-admin\"], \"type\": \"user\"}" 2> /dev/null)
 
 	# display error message if there was an error creating dato admin user in couch
-	if [[ $addDatoAdmin_curlResult != '{"ok":true,'* ]]; then
+	if [[ $addDatoAdmin_curlResult != '{"ok":true'* ]]; then
 		ynh_print_err --message="There was an error creating the dato admin user for in couch. You will probably have to do it manually (check the last section of this page for instructions: https://squeak.eauchat.org/apps/dato/?setups)."
 		ynh_print_err --message="Here is the error message from couchdb:"
 		ynh_print_err --message="$addDatoAdmin_curlResult"
@@ -199,7 +199,7 @@ if [[ $autosynchronize == true ]]; then
      -d "$usersSecDocModified" 2> /dev/null)
 
 	# display error message if there was an error modifying _users db _security document
-	if [[ $usersSecDocChange_curlResult != '{"ok":true,'* ]]; then
+	if [[ $usersSecDocChange_curlResult != '{"ok":true'* ]]; then
 		ynh_print_err --message="There was an error enabling dato users to access their user profile in couch. You will have to do it manually (check the 'Configure couchdb so that it accepts requests from dato' section in the following page for instructions: https://squeak.eauchat.org/apps/dato/?setups)."
 		ynh_print_err --message="Here is the error message from couchdb:"
 		ynh_print_err --message="$usersSecDocChange_curlResult"
