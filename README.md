@@ -22,7 +22,7 @@ The purpose of dato is not to propose a UI specific to some purpose, but somethi
 
 Dato is a progressive webapp, which means that you can install it from the browser in computer and phones, and use it offline.
 
-**Shipped version:** 1.5.18
+**Shipped version:** 1.5.19
 
 
 ## Screenshots
