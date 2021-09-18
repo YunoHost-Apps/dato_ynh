@@ -6,7 +6,7 @@
         "en": "Store all kinds of data with an extremely customizable interface.",
         "fr": "Stockez tous types de données avec une interface complètement customizable."
     },
-    "version": "1.5.19~ynh2",
+    "version": "1.6.0~ynh1",
     "url": "https://squeak.eauchat.org/dato",
     "upstream": {
         "license": "AGPL-3.0-or-later",
