@@ -6,7 +6,7 @@
         "en": "Store all kinds of data with an extremely customizable interface.",
         "fr": "Stockez tous types de données avec une interface complètement customizable."
     },
-    "version": "1.6.1~ynh1",
+    "version": "1.6.2~ynh1",
     "url": "https://squeak.eauchat.org/dato",
     "upstream": {
         "license": "AGPL-3.0-or-later",
@@ -79,8 +79,8 @@
                 "name": "couch_admin_name",
                 "type": "string",
                 "ask": {
-                    "en": "Please specify the username of the administrator of your couchdb instance (only if autosynchronization is enabled). If you didn't customize it, it should be called 'admin'.",
-                    "fr": "Entrez le nom de l'administrateur de votre serveur couchdb (nécessaire uniquement si l'autosynchronisation a été activée). Si vous ne l'avez pas modifié, ce devrait être 'admin'."
+                    "en": "Specify the username of the administrator of your couchdb instance (only if autosynchronization is enabled), if you didn't customize it, it should be called 'admin'",
+                    "fr": "Entrez le nom de l'administrateur de votre serveur couchdb (nécessaire uniquement si l'autosynchronisation a été activée), si vous ne l'avez pas modifié, ce devrait être 'admin'"
                 },
                 "example": "admin",
                 "optional": true,
@@ -90,8 +90,8 @@
                 "name": "couch_admin_password",
                 "type": "password",
                 "ask": {
-                    "en": "Please enter the password of your couchdb administrator (only if autosynchronization is enabled).",
-                    "fr": "Entrez le mot de passe de l'administrateur de votre serveur couchdb (nécessaire uniquement si l'autosynchronisation a été activée)."
+                    "en": "Enter the password of your couchdb administrator (only if autosynchronization is enabled)",
+                    "fr": "Entrez le mot de passe de l'administrateur de votre serveur couchdb (nécessaire uniquement si l'autosynchronisation a été activée)"
                 },
                 "optional": true
             },
@@ -99,8 +99,8 @@
                 "name": "couch_datoadmin_name",
                 "type": "string",
                 "ask": {
-                    "en": "Please choose the username of the dato admin user to create (only if autosynchronization is enabled).",
-                    "fr": "Choisissez le nom de l'administrateur de dato qui va être créé (nécessaire uniquement si l'autosynchronisation a été activée)."
+                    "en": "Choose the username of the dato admin user to create (only if autosynchronization is enabled)",
+                    "fr": "Choisissez le nom de l'administrateur de dato qui va être créé (nécessaire uniquement si l'autosynchronisation a été activée)"
                 },
                 "example": "dato-admin",
                 "optional": true,
@@ -110,8 +110,8 @@
                 "name": "couch_datoadmin_password",
                 "type": "password",
                 "ask": {
-                    "en": "Please choose the password to use for the dato admin user to create (only if autosynchronization is enabled).",
-                    "fr": "Choisissez le mot de passe de l'administrateur de dato qui va être créé (nécessaire uniquement si l'autosynchronisation a été activée)."
+                    "en": "Choose the password to use for the dato admin user to create (only if autosynchronization is enabled)",
+                    "fr": "Choisissez le mot de passe de l'administrateur de dato qui va être créé (nécessaire uniquement si l'autosynchronisation a été activée)"
                 },
                 "optional": true
             },
@@ -119,8 +119,8 @@
                 "name": "admin_email",
                 "type": "string",
                 "ask": {
-                    "en": "If you want the dato administrator email to be displayed in login page, so that users can contact you to create accounts... you can set your email here. Otherwise leave this empty. (only useful if autosynchronization is enabled)",
-                    "fr": "Si tu souhaites que l'email de l'administrateur de dato soit visible sur la page de login, afin que les utilisateurs puissent le contacter pour des demandes de compte... tu peux le spécifier ici. Sinon, laisser ce champ vide. (utile uniquement si l'autosynchronisation a été activée)"
+                    "en": "If you want the dato administrator email to be displayed in login page, so that users can contact you to create accounts... you can set your email here, otherwise leave this empty (only useful if autosynchronization is enabled)",
+                    "fr": "Si tu souhaites que l'email de l'administrateur de dato soit visible sur la page de login, afin que les utilisateurs puissent le contacter pour des demandes de compte... tu peux le spécifier ici, sinon laisser ce champ vide (utile uniquement si l'autosynchronisation a été activée)"
                 },
                 "example": "datoadmin((at))domain.tld",
                 "optional": true,
