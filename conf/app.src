@@ -1,5 +1,5 @@
-SOURCE_URL=https://framagit.org/squeak/dato/-/archive/v1.6.2/dato-v1.6.2.tar.gz
-SOURCE_SUM=3cd72532dcfa4e651110da53ad1e4dfd03e3f5a36f8bcb2d4f041e72e20d1bb0
+SOURCE_URL=https://framagit.org/squeak/dato/-/archive/v1.6.3/dato-v1.6.3.tar.gz
+SOURCE_SUM=200aa392cbe2e43d85b5a78d9289cc5957dbd6b7aa3d4491838d12aa5dbc9c30
 SOURCE_SUM_PRG=sha256sum
 SOURCE_FORMAT=tar.gz
 SOURCE_IN_SUBDIR=true
