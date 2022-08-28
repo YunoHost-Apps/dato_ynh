@@ -28,6 +28,7 @@ Dato is a progressive webapp, which means that you can install it from the brows
 
 **Shipped version:** 1.6.3~ynh3
 
+
 **Demo:** https://publicdato.eauchat.org/
 
 ## Screenshots

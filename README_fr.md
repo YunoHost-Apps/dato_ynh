@@ -24,7 +24,8 @@ Le but de dato n'est pas de proposer l'interface idéale pour chaque outil, mais
 Dato est une application web progressive, ce qui veut dire que vous pouvez l'installer sur ordinateur et téléphone facilement et l'utiliser hors connexion.
 
 
-**Version incluse :** 1.6.3~ynh3
+**Version incluse :** 1.6.3~ynh3
+
 
 **Démo :** https://publicdato.eauchat.org/
 
