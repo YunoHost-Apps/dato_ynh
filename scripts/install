@@ -24,12 +24,8 @@ ynh_abort_if_errors
 #=================================================
 
 domain=$YNH_APP_ARG_DOMAIN
-path_url="/" # not customizable, so not using: path_url=$YNH_APP_ARG_PATH
+path_url="/"
 is_public=$YNH_APP_ARG_IS_PUBLIC
-
-app=$YNH_APP_INSTANCE_NAME
-
-# autosynchronization variables
 autosynchronize=$YNH_APP_ARG_AUTOSYNCHRONIZE
 couch_url=$YNH_APP_ARG_COUCH_URL
 couch_admin_name=$YNH_APP_ARG_COUCH_ADMIN_NAME
@@ -37,6 +33,8 @@ couch_admin_password=$YNH_APP_ARG_COUCH_ADMIN_PASSWORD
 couch_datoadmin_name=$YNH_APP_ARG_COUCH_DATOADMIN_NAME
 couch_datoadmin_password=$YNH_APP_ARG_COUCH_DATOADMIN_PASSWORD
 admin_email=$YNH_APP_ARG_ADMIN_EMAIL
+
+app=$YNH_APP_INSTANCE_NAME
 
 # make sure autosynchronize variable is a boolean
 if [[
@@ -68,6 +66,7 @@ ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
 ynh_script_progression --message="Storing installation settings..." --weight=1
 
 ynh_app_setting_set --app=$app --key=domain --value=$domain
+ynh_app_setting_set --app=$app --key=path --value=$path_url
 ynh_app_setting_set --app=$app --key=admin_email --value=$admin_email
 ynh_app_setting_set --app=$app --key=autosynchronize --value=$autosynchronize
 ynh_app_setting_set --app=$app --key=final_path --value=$final_path
@@ -93,7 +92,6 @@ ynh_app_setting_set --app=$app --key=port --value=$port
 ynh_script_progression --message="Installing dependencies..." --weight=6
 
 ynh_install_app_dependencies $pkg_dependencies
-
 ynh_install_nodejs --nodejs_version=$nodejs_version
 
 #=================================================
@@ -102,7 +100,7 @@ ynh_install_nodejs --nodejs_version=$nodejs_version
 ynh_script_progression --message="Configuring system user..." --weight=1
 
 # Create a system user
-ynh_system_user_create --username=$app --home_dir=$final_path
+ynh_system_user_create --username=$app --home_dir="$final_path"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -112,6 +110,10 @@ ynh_script_progression --message="Setting up source files..." --weight=2
 ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 # Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source --dest_dir="$final_path"
+
+chmod 750 "$final_path"
+chmod -R o-rwx "$final_path"
+chown -R $app:www-data "$final_path"
 
 #=================================================
 # NGINX CONFIGURATION
@@ -128,13 +130,17 @@ ynh_add_nginx_config
 #=================================================
 ynh_script_progression --message="Building node dependencies..." --weight=90
 
-chown -R "$app":"$app" $final_path
-
 pushd "$final_path"
 	ynh_use_nodejs
-	sudo -u $app env $ynh_node_load_PATH npm install --loglevel warn
-	# ynh_exec_as $app PATH="$nodejs_path:$PATH" "$nodejs_path/npm" install --loglevel warn
+	ynh_exec_warn_less ynh_exec_as $app $ynh_node_load_PATH $ynh_npm install --loglevel warn
 popd
+
+#=================================================
+# ADD A CONFIGURATION
+#=================================================
+ynh_script_progression --message="Adding a configuration file..." --weight=3
+
+dato_setup_config_files
 
 #=================================================
 # SETUP SYSTEMD
@@ -143,13 +149,6 @@ ynh_script_progression --message="Configuring a systemd service..." --weight=2
 
 # Create a dedicated systemd config
 ynh_add_systemd_config
-
-#=================================================
-# GENERATE CONFIG FILES
-#=================================================
-ynh_script_progression --message="Generating dato config files..." --weight=3
-
-dato_setup_config_files
 
 #=================================================
 # CUSTOMIZE SETUP FOR AUTOSYNCHRONIZATION
@@ -208,16 +207,14 @@ if [[ $autosynchronize == true ]]; then
 fi
 
 #=================================================
-# GENERIC FINALIZATION
-#=================================================
 # SECURE FILES AND DIRECTORIES
 #=================================================
 
-# Set permissions to app files (let dato write right only to what it needs to modify)
-chown -R root: $final_path
 [ -d "$final_path/dist" ] || mkdir "$final_path/dist"
 chown -R $app:$app $final_path/dist $final_path/global $final_path/config
 
+#=================================================
+# GENERIC FINALIZATION
 #=================================================
 # SETUP LOGROTATE
 #=================================================
@@ -253,15 +250,6 @@ then
 	# The "main" permission is automatically created before the install script.
 	ynh_permission_update --permission="main" --add="visitors"
 fi
-
-# TODO: could consider using the following to further protect the admin panel with additional yunohost login
-# # Only the admin can access the admin panel of the app (if the app has an admin panel)
-# ynh_permission_create --permission="admin" --url="/admin" --allowed=$admin
-
-# # Everyone can access to the api part
-# # We don't want to display the tile in the sso so we put --show_tile="false"
-# # And we don't want that the YunoHost Admin can remove visitors group to this permission, so we put --protected="true"
-# ynh_permission_create --permission="api" --url "/api" --allowed="visitors" --show_tile="false" --protected="true"
 
 #=================================================
 # RELOAD NGINX

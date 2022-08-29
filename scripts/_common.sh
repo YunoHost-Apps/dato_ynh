@@ -15,20 +15,22 @@ nodejs_version=12
 #=================================================
 
 dato_setup_config_files() {
+	# create config directory (if it doesn't exist yet)
+	[ -d "$final_path/config/" ] || mkdir "$final_path/config/"
 
-  # create config directory (if it doesn't exist yet)
-  [ -d "$final_path/config/" ] || mkdir "$final_path/config/"
+	# setup public dato config
+	ynh_add_config --template="../conf/public.js" --destination="$final_path/config/public.js"
+	chmod 400 "$final_path/config/public.js"
+	chown $app:$app "$final_path/config/public.js"
 
-  # setup public dato config
-  ynh_add_config --template="../conf/public.js" --destination="$final_path/config/public.js"
-
-  # setup private dato config
-  if [[ $autosynchronize == true ]]; then
-  	ynh_add_config --template="../conf/private-autosync.js" --destination="$final_path/config/private.js"
-  else
-  	ynh_add_config --template="../conf/private.js" --destination="$final_path/config/private.js"
-  fi
-
+	# setup private dato config
+	if [[ $autosynchronize == true ]]; then
+		ynh_add_config --template="../conf/private-autosync.js" --destination="$final_path/config/private.js"
+	else
+		ynh_add_config --template="../conf/private.js" --destination="$final_path/config/private.js"
+	fi
+	chmod 400 "$final_path/config/private.js"
+	chown $app:$app "$final_path/config/private.js"
 }
 
 #=================================================

@@ -1,8 +1,6 @@
 ;; Test without autosync
 	; Manifest
 		domain="domain.tld"
-		path="/"
-		admin="john"
 		is_public=1
 		autosynchronize=0
 		couch_url="none"
@@ -21,9 +19,11 @@
 		upgrade=1
 		# 1.5.11~ynh2
 		upgrade=1	from_commit=b127adc6bf773afd1bc2ee7cead36c91c4fded60
+		# 1.6.3~ynh2
+		upgrade=1	from_commit=6cbecb3f2af6adfce5bdf8077c906569703a1508
 		backup_restore=1
 		multi_instance=1
-		port_already_use=1
+		port_already_use=0
 		change_url=1
 ;;; Options
 Email=squeak@eauchat.org
