@@ -43,13 +43,12 @@ ynh_script_progression --message="Stopping and removing the systemd service..." 
 ynh_remove_systemd_config
 
 #=================================================
-# REMOVE DEPENDENCIES
+# REMOVE LOGROTATE CONFIGURATION
 #=================================================
-ynh_script_progression --message="Removing dependencies..." --weight=13
+ynh_script_progression --message="Removing logrotate configuration..." --weight=1
 
-# Remove metapackage and its dependencies
-ynh_remove_nodejs
-ynh_remove_app_dependencies
+# Remove the app-specific logrotate config
+ynh_remove_logrotate
 
 #=================================================
 # REMOVE APP MAIN DIR
@@ -68,12 +67,13 @@ ynh_script_progression --message="Removing NGINX web server configuration..." --
 ynh_remove_nginx_config
 
 #=================================================
-# REMOVE LOGROTATE CONFIGURATION
+# REMOVE DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Removing logrotate configuration..." --weight=1
+ynh_script_progression --message="Removing dependencies..." --weight=13
 
-# Remove the app-specific logrotate config
-ynh_remove_logrotate
+# Remove metapackage and its dependencies
+ynh_remove_nodejs
+ynh_remove_app_dependencies
 
 #=================================================
 # SPECIFIC REMOVE

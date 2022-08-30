@@ -17,7 +17,7 @@ ynh_script_progression --message="Loading installation settings..." --weight=1
 app=$YNH_APP_INSTANCE_NAME
 
 domain=$(ynh_app_setting_get --app=$app --key=domain)
-path_url="/"
+path_url=$(ynh_app_setting_get --app=$app --key=path)
 port=$(ynh_app_setting_get --app=$app --key=port)
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 autosynchronize=$(ynh_app_setting_get --app=$app --key=autosynchronize)
@@ -58,6 +58,24 @@ ynh_script_progression --message="Stopping a systemd service..." --weight=1
 ynh_systemd_action --service_name=$app --action="stop" --log_path="systemd"
 
 #=================================================
+# ENSURE DOWNWARD COMPATIBILITY
+#=================================================
+ynh_script_progression --message="Ensuring downward compatibility..."
+
+# Cleaning legacy permissions
+if ynh_legacy_permissions_exists; then
+	ynh_legacy_permissions_delete_all
+
+	ynh_app_setting_delete --app=$app --key=is_public
+fi
+
+# If path_url doesn't exist, create it
+if [ -z "$path_url" ]; then
+	path_url="/"
+	ynh_app_setting_set --app=$app --key=path_url --value=$path_url
+fi
+
+#=================================================
 # CREATE DEDICATED USER
 #=================================================
 ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
@@ -74,12 +92,20 @@ then
 	ynh_script_progression --message="Upgrading source files..." --weight=3
 
 	# Download, check integrity, uncompress and patch the source from app.src
-	ynh_setup_source --dest_dir="$final_path"
-
-	# Regenerate config files removed in upgrade
-	ynh_script_progression --message="Regenerating dato config files..." --weight=3
-	dato_setup_config_files
+	ynh_setup_source --dest_dir="$final_path" --keep="config/public.js config/private.js"
 fi
+
+chmod 750 "$final_path"
+chmod -R o-rwx "$final_path"
+chown -R $app:www-data "$final_path"
+
+#=================================================
+# UPGRADE DEPENDENCIES
+#=================================================
+ynh_script_progression --message="Upgrading dependencies..." --weight=5
+
+ynh_install_app_dependencies $pkg_dependencies
+ynh_install_nodejs --nodejs_version=$nodejs_version
 
 #=================================================
 # NGINX CONFIGURATION
@@ -90,30 +116,24 @@ ynh_script_progression --message="Upgrading NGINX web server configuration..." -
 ynh_add_nginx_config
 
 #=================================================
-# UPGRADE DEPENDENCIES
-#=================================================
-ynh_script_progression --message="Upgrading dependencies..." --weight=5
-
-ynh_install_app_dependencies $pkg_dependencies
-
-ynh_install_nodejs --nodejs_version=$nodejs_version
-
-#=================================================
 # SPECIFIC UPGRADE
 #=================================================
 # BUILD NODE DEPENDENCIES
 #=================================================
 ynh_script_progression --message="Building node dependencies..." --weight=90
 
-chown -R "$app":"$app" $final_path
-
 pushd "$final_path"
 	ynh_use_nodejs
-	# remove node_modules folder before upgrading (because dato dependencies need to be installed from scratch otherwise some dependencies are not properly upgraded)
 	ynh_secure_remove --file="./node_modules"
-	# reinstall dependencies from scratch
-	sudo -u $app env $ynh_node_load_PATH npm install --loglevel warn
+	ynh_exec_warn_less ynh_exec_as $app $ynh_node_load_PATH $ynh_npm install --loglevel warn
 popd
+
+#=================================================
+# SECURE FILES AND DIRECTORIES
+#=================================================
+
+[ -d "$final_path/dist" ] || mkdir "$final_path/dist"
+chown -R $app:$app $final_path/dist $final_path/global $final_path/config
 
 #=================================================
 # SETUP SYSTEMD
@@ -125,15 +145,6 @@ ynh_add_systemd_config
 
 #=================================================
 # GENERIC FINALIZATION
-#=================================================
-# SECURE FILES AND DIRECTORIES
-#=================================================
-
-# Set permissions on app files (let dato write right only to what it needs to modify)
-chown -R root: $final_path
-[ -d "$final_path/dist" ] || mkdir "$final_path/dist"
-chown -R $app:$app $final_path/dist $final_path/global $final_path/config
-
 #=================================================
 # SETUP LOGROTATE
 #=================================================
@@ -152,7 +163,7 @@ yunohost service add $app --description="Data storage with a convenient and flex
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting dato app service and building pages..." --weight=60
+ynh_script_progression --message="Starting a systemd service..." --weight=60
 
 ynh_systemd_action --service_name=$app --action="start" --log_path="systemd" --line_match="electrode server listening on port" --timeout=600
 
