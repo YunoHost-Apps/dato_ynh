@@ -5,15 +5,16 @@ It shall NOT be edited by hand.
 
 # Dato pour YunoHost
 
-[![Niveau d'intégration](https://dash.yunohost.org/integration/dato.svg)](https://dash.yunohost.org/appci/app/dato) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/dato.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/dato.maintain.svg)  
+[![Niveau d’intégration](https://dash.yunohost.org/integration/dato.svg)](https://dash.yunohost.org/appci/app/dato) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/dato.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/dato.maintain.svg)
+
 [![Installer Dato avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=dato)
 
 *[Read this readme in english.](./README.md)*
 
-> *Ce package vous permet d'installer Dato rapidement et simplement sur un serveur YunoHost.
-Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l'installer et en profiter.*
+> *Ce package vous permet d’installer Dato rapidement et simplement sur un serveur YunoHost.
+Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l’installer et en profiter.*
 
-## Vue d'ensemble
+## Vue d’ensemble
 
 Dato vous permet de créer, modifier tous types de bases de données avec une interface flexible.
 
@@ -24,14 +25,13 @@ Le but de dato n'est pas de proposer l'interface idéale pour chaque outil, mais
 Dato est une application web progressive, ce qui veut dire que vous pouvez l'installer sur ordinateur et téléphone facilement et l'utiliser hors connexion.
 
 
-**Version incluse :** 1.6.3~ynh3
-
+**Version incluse :** 1.6.3~ynh3
 
 **Démo :** https://publicdato.eauchat.org/
 
-## Captures d'écran
+## Captures d’écran
 
-![Capture d'écran de Dato](./doc/screenshots/screenshot1.png)
+![Capture d’écran de Dato](./doc/screenshots/screenshot1.png)
 
 ## Avertissements / informations importantes
 
@@ -64,9 +64,9 @@ Vous pouvez aussi forcer une mise à jour de l'application depuis le serveur en 
 
 ## Documentations et ressources
 
-* Documentation officielle de l'admin : <https://squeak.eauchat.org/dato/>
-* Dépôt de code officiel de l'app : <https://framagit.org/squeak/dato>
-* Documentation YunoHost pour cette app : <https://yunohost.org/app_dato>
+* Documentation officielle de l’admin : <https://squeak.eauchat.org/dato/>
+* Dépôt de code officiel de l’app : <https://framagit.org/squeak/dato>
+* YunoHost Store: <https://apps.yunohost.org/app/dato>
 * Signaler un bug : <https://github.com/YunoHost-Apps/dato_ynh/issues>
 
 ## Informations pour les développeurs
@@ -81,4 +81,4 @@ ou
 sudo yunohost app upgrade dato -u https://github.com/YunoHost-Apps/dato_ynh/tree/testing --debug
 ```
 
-**Plus d'infos sur le packaging d'applications :** <https://yunohost.org/packaging_apps>
+**Plus d’infos sur le packaging d’applications :** <https://yunohost.org/packaging_apps>

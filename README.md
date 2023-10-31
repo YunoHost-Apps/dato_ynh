@@ -5,7 +5,8 @@ It shall NOT be edited by hand.
 
 # Dato for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/dato.svg)](https://dash.yunohost.org/appci/app/dato) ![Working status](https://ci-apps.yunohost.org/ci/badges/dato.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/dato.maintain.svg)  
+[![Integration level](https://dash.yunohost.org/integration/dato.svg)](https://dash.yunohost.org/appci/app/dato) ![Working status](https://ci-apps.yunohost.org/ci/badges/dato.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/dato.maintain.svg)
+
 [![Install Dato with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=dato)
 
 *[Lire ce readme en français.](./README_fr.md)*
@@ -27,7 +28,6 @@ Dato is a progressive webapp, which means that you can install it from the brows
 
 
 **Shipped version:** 1.6.3~ynh3
-
 
 **Demo:** https://publicdato.eauchat.org/
 
@@ -77,7 +77,7 @@ You can also force reloading the app from the server opening "about:serviceworke
 
 * Official admin documentation: <https://squeak.eauchat.org/dato/>
 * Upstream app code repository: <https://framagit.org/squeak/dato>
-* YunoHost documentation for this app: <https://yunohost.org/app_dato>
+* YunoHost Store: <https://apps.yunohost.org/app/dato>
 * Report a bug: <https://github.com/YunoHost-Apps/dato_ynh/issues>
 
 ## Developer info
