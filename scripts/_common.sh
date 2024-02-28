@@ -4,9 +4,6 @@
 # COMMON VARIABLES
 #=================================================
 
-# dependencies used by the app
-pkg_dependencies="curl jq"
-
 # nodejs version
 nodejs_version=12
 
@@ -14,23 +11,28 @@ nodejs_version=12
 # PERSONAL HELPERS
 #=================================================
 
+bool_to_str() {
+    bool_str=(false true)
+    return "${bool_str[$1]}"
+}
+
 dato_setup_config_files() {
-	# create config directory (if it doesn't exist yet)
-	[ -d "$final_path/config/" ] || mkdir "$final_path/config/"
+    # create config directory (if it doesn't exist yet)
+    [ -d "$install_dir/config/" ] || mkdir "$install_dir/config/"
 
-	# setup public dato config
-	ynh_add_config --template="../conf/public.js" --destination="$final_path/config/public.js"
-	chmod 400 "$final_path/config/public.js"
-	chown $app:$app "$final_path/config/public.js"
+    # setup public dato config
+    ynh_add_config --template="public.js" --destination="$install_dir/config/public.js"
+    chmod 400 "$install_dir/config/public.js"
+    chown "$app:$app" "$install_dir/config/public.js"
 
-	# setup private dato config
-	if [[ $autosynchronize == true ]]; then
-		ynh_add_config --template="../conf/private-autosync.js" --destination="$final_path/config/private.js"
-	else
-		ynh_add_config --template="../conf/private.js" --destination="$final_path/config/private.js"
-	fi
-	chmod 400 "$final_path/config/private.js"
-	chown $app:$app "$final_path/config/private.js"
+    # setup private dato config
+    if [[ $autosynchronize == true ]]; then
+        ynh_add_config --template="private-autosync.js" --destination="$install_dir/config/private.js"
+    else
+        ynh_add_config --template="private.js" --destination="$install_dir/config/private.js"
+    fi
+    chmod 400 "$install_dir/config/private.js"
+    chown "$app:$app" "$install_dir/config/private.js"
 }
 
 #=================================================

@@ -1,0 +1,116 @@
+#:schema https://raw.githubusercontent.com/YunoHost/apps/master/schemas/manifest.v2.schema.json
+
+packaging_format = 2
+
+id = "dato"
+name = "Dato"
+description.en = "Store all kinds of data with an extremely customizable interface."
+description.fr = "Stockez tous types de données avec une interface complètement customizable."
+
+version = "1.6.3~ynh3"
+
+maintainers = ["Squeak"]
+
+[upstream]
+license = "AGPL-3.0-or-later"
+demo = "https://publicdato.eauchat.org/"
+admindoc = "https://squeak.eauchat.org/dato/"
+code = "https://framagit.org/squeak/dato"
+website = "https://squeak.eauchat.org/dato"
+
+[integration]
+yunohost = ">= 11.2"
+architectures = "all"
+multi_instance = true
+ldap = false
+sso = false
+disk = "50M"
+ram.build = "50M" # FIXME: replace with an **estimate** minimum ram requirement. e.g. 50M, 400M, 1G, ...
+ram.runtime = "50M" # FIXME: replace with an **estimate** minimum ram requirement. e.g. 50M, 400M, 1G, ...
+
+[install]
+    [install.domain]
+    type = "domain"
+
+    [install.init_main_permission]
+    help.en = "Will users need to have a yunohost account to use dato? If you choose to set autosynchronization to true, then dato contains it's own login system, so you probably don't need to make it private."
+    help.fr = "Les utilisateurs devront-ils avoir un compte pour utiliser dato ? Si vous activez l'autosynchronisation, dato contient son propre système de login, ce n'est donc probablement pas nécessaire de la rendre privée."
+    type = "group"
+    default = "visitors"
+
+    [install.autosynchronize]
+    ask.en = "Do you want to autosynchronize users databases?"
+    ask.fr = "Voulez vous activer l'autosynchronisation des bases de données des utilisateurs ?"
+    help.en = "If you activate autosynchronization, to use dato, people will need to have a dato-specific account on your server. To enable this, you need a couchdb server, you can install one with the couchdb yunohost package (you should do this before proceeding to dato installation)."
+    help.fr = "Si vous activez l'autosynchronisation, pour utiliser dato, les utilisateurs devront avoir un compte specifique à dato sur votre serveur. Pour activer cette option, vous devez avoir un server couchdb, vous pouvez en installer un en utilisant le packet yunohost couchdb (vous devez avoir couchdb installé avant d'installer dato)."
+    type = "boolean"
+    default = false
+
+    [install.autosync_info]
+    ask.en = "All the following options are useful only if you chose to enable autosynchronization. You can skip them all if you didn't."
+    ask.fr = "Les options qui suivent ne sont utiles que si vous avez choisi d'activer l'autosynchronisation. Vous pouvez toutes les ignorer si ce n'est pas le cas."
+    type = "text"
+
+    [install.couch_url]
+    ask.en = "What is the url of your couchdb server (only if autosynchronization is enabled)."
+    ask.fr = "Quelle est l'addresse de votre serveur couchdb (nécessaire uniquement si l'autosynchronisation a été activée)."
+    type = "string"
+    example = "https://couch.domain.tld"
+    optional = true
+    default = "none"
+
+    [install.couch_admin_name]
+    ask.en = "Specify the username of the administrator of your couchdb instance (only if autosynchronization is enabled), if you didn't customize it, it should be called 'admin'"
+    ask.fr = "Entrez le nom de l'administrateur de votre serveur couchdb (nécessaire uniquement si l'autosynchronisation a été activée), si vous ne l'avez pas modifié, ce devrait être 'admin'"
+    type = "string"
+    example = "admin"
+    optional = true
+    default = "admin"
+
+    [install.couch_admin_password]
+    ask.en = "Enter the password of your couchdb administrator (only if autosynchronization is enabled)"
+    ask.fr = "Entrez le mot de passe de l'administrateur de votre serveur couchdb (nécessaire uniquement si l'autosynchronisation a été activée)"
+    type = "password"
+    optional = true
+
+    [install.couch_datoadmin_name]
+    ask.en = "Choose the username of the dato admin user to create (only if autosynchronization is enabled)"
+    ask.fr = "Choisissez le nom de l'administrateur de dato qui va être créé (nécessaire uniquement si l'autosynchronisation a été activée)"
+    type = "string"
+    example = "dato-admin"
+    optional = true
+    default = "none"
+
+    [install.couch_datoadmin_password]
+    ask.en = "Choose the password to use for the dato admin user to create (only if autosynchronization is enabled)"
+    ask.fr = "Choisissez le mot de passe de l'administrateur de dato qui va être créé (nécessaire uniquement si l'autosynchronisation a été activée)"
+    type = "password"
+    optional = true
+
+    [install.admin_email]
+    ask.en = "If you want the dato administrator email to be displayed in login page, so that users can contact you to create accounts... you can set your email here, otherwise leave this empty (only useful if autosynchronization is enabled)"
+    ask.fr = "Si tu souhaites que l'email de l'administrateur de dato soit visible sur la page de login, afin que les utilisateurs puissent le contacter pour des demandes de compte... tu peux le spécifier ici, sinon laisser ce champ vide (utile uniquement si l'autosynchronisation a été activée)"
+    type = "string"
+    example = "datoadmin((at))domain.tld"
+    optional = true
+    default = ""
+
+[resources]
+    [resources.sources.main]
+    url = "https://framagit.org/squeak/dato/-/archive/v1.6.3/dato-v1.6.3.tar.gz"
+    sha256 = "200aa392cbe2e43d85b5a78d9289cc5957dbd6b7aa3d4491838d12aa5dbc9c30"
+
+    autoupdate.strategy = "latest_gitlab_release"
+
+    [resources.system_user]
+
+    [resources.install_dir]
+
+    [resources.permissions]
+    main.url = "/"
+
+    [resources.ports]
+    main.default = 9559
+
+    [resources.apt]
+    packages = ["curl", "jq"]
