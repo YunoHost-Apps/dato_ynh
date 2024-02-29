@@ -13,7 +13,7 @@ nodejs_version=12
 
 bool_to_str() {
     bool_str=(false true)
-    return "${bool_str[$1]}"
+    echo "${bool_str[$1]}"
 }
 
 dato_setup_config_files() {
