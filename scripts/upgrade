@@ -15,11 +15,6 @@ ynh_script_progression --message="Stopping a systemd service..." --weight=1
 ynh_systemd_action --service_name="$app" --action="stop" --log_path="systemd"
 
 #=================================================
-# ENSURE DOWNWARD COMPATIBILITY
-#=================================================
-# ynh_script_progression --message="Ensuring downward compatibility..."
-
-#=================================================
 # UPGRADE DEPENDENCIES
 #=================================================
 ynh_script_progression --message="Upgrading NodeJS..." --weight=5
@@ -45,7 +40,7 @@ chown -R "$app:$app" "$install_dir/dist" "$install_dir/global" "$install_dir/con
 #=================================================
 # BUILD NODE DEPENDENCIES
 #=================================================
-#REMOVEME? ynh_script_progression --message="Building node dependencies..." --weight=90
+ynh_script_progression --message="Building node dependencies..." --weight=20
 
 pushd "$install_dir"
     ynh_use_nodejs
