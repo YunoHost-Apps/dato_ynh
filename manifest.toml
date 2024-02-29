@@ -50,6 +50,7 @@ ram.runtime = "50M" # FIXME: replace with an **estimate** minimum ram requiremen
     ask.en = "All the following options are useful only if you chose to enable autosynchronization. You can skip them all if you didn't."
     ask.fr = "Les options qui suivent ne sont utiles que si vous avez choisi d'activer l'autosynchronisation. Vous pouvez toutes les ignorer si ce n'est pas le cas."
     type = "display_text"
+    default = ""
 
     [install.couch_url]
     ask.en = "What is the url of your couchdb server (only if autosynchronization is enabled)."
