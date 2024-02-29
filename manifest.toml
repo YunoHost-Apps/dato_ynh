@@ -7,7 +7,7 @@ name = "Dato"
 description.en = "Store all kinds of data with an extremely customizable interface."
 description.fr = "Stockez tous types de données avec une interface complètement customizable."
 
-version = "1.6.3~ynh3"
+version = "1.6.3~ynh4"
 
 maintainers = ["Squeak"]
 
