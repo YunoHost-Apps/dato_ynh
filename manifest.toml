@@ -19,7 +19,7 @@ code = "https://framagit.org/squeak/dato"
 website = "https://squeak.eauchat.org/dato"
 
 [integration]
-yunohost = ">= 11.2.11"
+yunohost = ">= 11.2.10"
 architectures = "all"
 multi_instance = true
 ldap = false
