@@ -17,8 +17,7 @@ bool_to_str() {
 }
 
 dato_setup_config_files() {
-    # create config directory (if it doesn't exist yet)
-    [ -d "$install_dir/config/" ] || mkdir "$install_dir/config/"
+    mkdir -p "$install_dir/config/"
 
     # setup public dato config
     ynh_add_config --template="public.js" --destination="$install_dir/config/public.js"

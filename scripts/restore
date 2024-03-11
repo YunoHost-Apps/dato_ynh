@@ -26,8 +26,8 @@ ynh_restore_file --origin_path="$install_dir"
 chmod -R o-rwx "$install_dir"
 chown -R "$app:www-data" "$install_dir"
 
-mkdir -p "$install_dir/dist"
-chown -R "$app:$app" "$install_dir/dist" "$install_dir/global" "$install_dir/config"
+mkdir -p "$install_dir/sources/dist"
+chown -R "$app:$app" "$install_dir/sources/dist" "$install_dir/sources/global" "$install_dir/config"
 
 #=================================================
 # RESTORE VARIOUS FILES

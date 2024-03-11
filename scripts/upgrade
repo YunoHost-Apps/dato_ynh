@@ -15,6 +15,18 @@ ynh_script_progression --message="Stopping a systemd service..." --weight=1
 ynh_systemd_action --service_name="$app" --action="stop" --log_path="systemd"
 
 #=================================================
+# ENSURE DOWNWARD COMPATIBILITY
+#=================================================
+ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
+
+# Cleanup legacy install dir
+if [ ! -d "$install_dir/sources" ]; then
+    mkdir "$install_dir/sources"
+    find . -mindepth 1 -maxdepth 1 ! -name "sources" -exec mv -t "$install_dir/sources" "{}" +
+    mv "$install_dir/sources/config" "$install_dir"
+fi
+
+#=================================================
 # UPGRADE DEPENDENCIES
 #=================================================
 ynh_script_progression --message="Upgrading NodeJS..." --weight=5
@@ -27,13 +39,13 @@ ynh_install_nodejs --nodejs_version="$nodejs_version"
 ynh_script_progression --message="Upgrading source files..." --weight=3
 
 # Download, check integrity, uncompress and patch the source from app.src
-ynh_setup_source --dest_dir="$install_dir" --full_replace=1 --keep="config/public.js config/private.js"
+ynh_setup_source --dest_dir="$install_dir/sources" --full_replace=1
 
 chmod -R o-rwx "$install_dir"
 chown -R "$app:www-data" "$install_dir"
 
-mkdir "$install_dir/dist"
-chown -R "$app:$app" "$install_dir/dist" "$install_dir/global" "$install_dir/config"
+mkdir -p "$install_dir/sources/dist"
+chown -R "$app:$app" "$install_dir/sources/dist" "$install_dir/sources/global" "$install_dir/config"
 
 #=================================================
 # SPECIFIC UPGRADE
@@ -42,7 +54,7 @@ chown -R "$app:$app" "$install_dir/dist" "$install_dir/global" "$install_dir/con
 #=================================================
 ynh_script_progression --message="Building node dependencies..." --weight=20
 
-pushd "$install_dir"
+pushd "$install_dir/sources"
     ynh_use_nodejs
     ynh_exec_warn_less ynh_exec_as "$app" "$ynh_node_load_PATH" "$ynh_npm" install --loglevel warn
 popd

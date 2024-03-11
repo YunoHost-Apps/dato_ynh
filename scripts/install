@@ -28,17 +28,17 @@ ynh_install_nodejs --nodejs_version="$nodejs_version"
 ynh_script_progression --message="Setting up source files..." --weight=2
 
 # Download, check integrity, uncompress and patch the source from app.src
-ynh_setup_source --dest_dir="$install_dir"
+ynh_setup_source --dest_dir="$install_dir/sources"
 
-chmod -R o-rwx "$install_dir"
-chown -R "$app:www-data" "$install_dir"
+chmod -R o-rwx "$install_dir/sources"
+chown -R "$app:www-data" "$install_dir/sources"
 
 #=================================================
 # BUILD NODE DEPENDENCIES
 #=================================================
 ynh_script_progression --message="Building node dependencies..." --weight=90
 
-pushd "$install_dir"
+pushd "$install_dir/sources"
     ynh_use_nodejs
     ynh_exec_warn_less ynh_exec_as "$app" "$ynh_node_load_PATH" "$ynh_npm" install --loglevel warn
 popd
@@ -62,7 +62,7 @@ if [[ $autosynchronize == true ]]; then
 	ynh_script_progression --message="Customizing couch config..." --weight=2
 
 	# make sure that couchdb has CORS enabled and that it accepts requests from dato domain
-	ynh_add_config --template="../conf/couch.ini" --destination="/opt/couchdb/etc/local.d/$app.ini"
+	ynh_add_config --template="couch.ini" --destination="/opt/couchdb/etc/local.d/$app.ini"
 
 	# restart couchdb service so that it takes into consideration the changes
 	yunohost service restart couchdb
@@ -110,8 +110,8 @@ fi
 # SECURE FILES AND DIRECTORIES
 #=================================================
 
-[ -d "$install_dir/dist" ] || mkdir "$install_dir/dist"
-chown -R $app:$app $install_dir/dist $install_dir/global $install_dir/config
+mkdir -p "$install_dir/sources/dist"
+chown -R "$app:$app" "$install_dir/sources/dist" "$install_dir/config"
 
 #=================================================
 # SYSTEM CONFIGURATION

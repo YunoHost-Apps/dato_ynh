@@ -6,9 +6,9 @@ After=network.target
 Type=simple
 User=__APP__
 Group=__APP__
-WorkingDirectory=__INSTALL_DIR__/
+WorkingDirectory=__INSTALL_DIR__/sources/
 Environment=NODE_ENV=production
-Environment=NODE_CONFIG_DIR=__INSTALL_DIR__/config
+Environment=NODE_CONFIG_DIR=__INSTALL_DIR__/config/
 Environment="__YNH_NODE_LOAD_PATH__"
 ExecStart=__YNH_NPM__ start
 StandardOutput=syslog
