@@ -1,12 +1,8 @@
-* Any known limitations, constrains or stuff not working, such as (but not limited to):
-    * For now, dato needs a full domain, it doesn't support being set to a subpath.
-    * LDAP is not supported, but dato has it's own user's control system, so it can be used publicly, or restricted to some users when autosynchronization is enabled.
 
 ## Configuration
 
 To configure dato, you can edit the `config/public.js` file in the app directory that should be in `/opt/yunohost/APPID/` where `APPID` is `dato` if it's the first installed instance, `dato__2`, `dato__3`... for additional instances.
 You can also make modifications in `config/private.js`, but be sure to know what you're doing when doing so.
-
 
 ## Autosynchronization
 
@@ -16,7 +12,6 @@ Then when installing dato, set the url to your couchdb server when prompted (you
 
 If you want to allow both a free usage of the app by anyone, and autosynchronization for some users, you can install the dato package multiple times with different setups.
 
-
 ## Adding users
 
 If you setup autosynchronization, users will need an account to use the app. Dato doesn't support LDAP for the moment, so you will need to add users in it's own database.
@@ -24,7 +19,6 @@ To add a user to dato, just visit the `/users/` page (e.g. https://dato.yourdoma
 If you want a user to have administration rights (= to have the power to add/remove users) you can give that user the `dato-admin` role.
 
 Also, if you need, you can make use of the password reset feature to allow users to modify their passwords, you will just need to send them the generated password reset link.
-
 
 ## A note about dato
 

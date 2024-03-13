@@ -1,0 +1,10 @@
+#:schema https://raw.githubusercontent.com/YunoHost/apps/master/schemas/tests.v1.schema.json
+
+test_format = 1.0
+
+[default]
+    args.autosynchronize = false
+    args.couch_admin_password = "ANicePassword"
+    args.couch_datoadmin_password = "ANicePassword"
+
+    test_upgrade_from.6cbecb3f2af6adfce5bdf8077c906569703a1508.name = "1.6.3~ynh2"

@@ -1,12 +1,8 @@
-* Limitations
-    * Pour le moment, dato a besoin d'un domaine/sous-domaine complet et ne peut être installé dans un sous-chemin.
-    * LDAP n'est pas supporté, mais dato contient son propre mécanisme de gestion des utilisateurs, et permet de rendre l'application soit disponible à tous, soit restreinte aux utilisateurs choisis quand l'autosynchronisation est activée.
 
 ## Configuration
 
 Cette application peut être personnalisée en modifiant le fichier `config/public.js` situé dans `/opt/yunohost/APPID/` (`APPID` devrait-être `dato` pour une première instance et puis, `dato__2`, `dato__3`... pour les suivantes).
 Il est aussi possible de modifier `config/private.js`, mais à vos risques et périls.
-
 
 ## Ajouter des utilisateurs
 
@@ -15,7 +11,6 @@ Pour ajouter un utilisateur, il suffit de visiter la page `/users/` (https://dat
 Si vous voulez donner le droit à un utilisateur d'administrer (= d'ajouter/supprimer des utilisateurs), il suffit de lui donner additionnellement, le rôle `dato-admin`.
 
 Si besoin, vous pouvez créer des liens pour permettre à un utilisateur de modifier son mot de passe. Il suffira alors d'envoyer ce lien manuellement à l'utilisateur.
-
 
 ## Note sur dato
 
