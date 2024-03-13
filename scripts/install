@@ -46,7 +46,7 @@ popd
 #=================================================
 # ADD A CONFIGURATION
 #=================================================
-ynh_script_progression --message="Adding a configuration file..." --weight=3
+ynh_script_progression --message="Adding $app's configuration file..." --weight=3
 
 dato_setup_config_files
 

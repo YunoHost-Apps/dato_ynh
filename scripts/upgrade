@@ -43,9 +43,6 @@ ynh_setup_source --dest_dir="$install_dir/sources" --full_replace=1 --keep="conf
 chmod -R o-rwx "$install_dir"
 chown -R "$app:www-data" "$install_dir"
 
-mkdir -p "$install_dir/sources/dist"
-chown -R "$app:$app" "$install_dir/sources/dist" "$install_dir/sources/global" "$install_dir/sources/config"
-
 #=================================================
 # SPECIFIC UPGRADE
 #=================================================
@@ -57,6 +54,13 @@ pushd "$install_dir/sources"
     ynh_use_nodejs
     ynh_exec_warn_less ynh_exec_as "$app" "$ynh_node_load_PATH" "$ynh_npm" install --loglevel warn
 popd
+
+#=================================================
+# ADD A CONFIGURATION
+#=================================================
+ynh_script_progression --message="Updating $app's configuration file..." --weight=3
+
+dato_setup_config_files
 
 #=================================================
 # REAPPLY SYSTEM CONFIGURATIONS
