@@ -27,7 +27,7 @@ chmod -R o-rwx "$install_dir"
 chown -R "$app:www-data" "$install_dir"
 
 mkdir -p "$install_dir/sources/dist"
-chown -R "$app:$app" "$install_dir/sources/dist" "$install_dir/sources/global" "$install_dir/config"
+chown -R "$app:$app" "$install_dir/sources/dist" "$install_dir/sources/global" "$install_dir/sources/config"
 
 #=================================================
 # RESTORE VARIOUS FILES

@@ -17,21 +17,21 @@ bool_to_str() {
 }
 
 dato_setup_config_files() {
-    mkdir -p "$install_dir/config/"
+    mkdir -p "$install_dir/sources/config/"
 
     # setup public dato config
-    ynh_add_config --template="public.js" --destination="$install_dir/config/public.js"
-    chmod 400 "$install_dir/config/public.js"
-    chown "$app:$app" "$install_dir/config/public.js"
+    ynh_add_config --template="public.js" --destination="$install_dir/sources/config/public.js"
+    chmod 400 "$install_dir/sources/config/public.js"
+    chown "$app:$app" "$install_dir/sources/config/public.js"
 
     # setup private dato config
     if [[ $autosynchronize == true ]]; then
-        ynh_add_config --template="private-autosync.js" --destination="$install_dir/config/private.js"
+        ynh_add_config --template="private-autosync.js" --destination="$install_dir/sources/config/private.js"
     else
-        ynh_add_config --template="private.js" --destination="$install_dir/config/private.js"
+        ynh_add_config --template="private.js" --destination="$install_dir/sources/config/private.js"
     fi
-    chmod 400 "$install_dir/config/private.js"
-    chown "$app:$app" "$install_dir/config/private.js"
+    chmod 400 "$install_dir/sources/config/private.js"
+    chown "$app:$app" "$install_dir/sources/config/private.js"
 }
 
 #=================================================

@@ -111,7 +111,7 @@ fi
 #=================================================
 
 mkdir -p "$install_dir/sources/dist"
-chown -R "$app:$app" "$install_dir/sources/dist" "$install_dir/config"
+chown -R "$app:$app" "$install_dir/sources/dist" "$install_dir/sources/config"
 
 #=================================================
 # SYSTEM CONFIGURATION
