@@ -52,6 +52,8 @@ ynh_script_progression --message="Building node dependencies..." --weight=20
 
 pushd "$install_dir/sources"
     ynh_use_nodejs
+    ynh_secure_remove --file="$install_dir/node_modules/"
+    ynh_secure_remove --file="$install_dir/package-lock.json"
     ynh_exec_warn_less ynh_exec_as "$app" "$ynh_node_load_PATH" "$ynh_npm" install --loglevel warn
 popd
 
