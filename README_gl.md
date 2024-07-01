@@ -5,7 +5,7 @@ NON debe editarse manualmente.
 
 # Dato para YunoHost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/dato.svg)](https://dash.yunohost.org/appci/app/dato) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/dato.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/dato.maintain.svg)
+[![Nivel de integración](https://dash.yunohost.org/integration/dato.svg)](https://ci-apps.yunohost.org/ci/apps/dato/) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/dato.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/dato.maintain.svg)
 
 [![Instalar Dato con YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=dato)
 
@@ -27,7 +27,7 @@ The purpose of dato is not to propose a UI specific to some purpose, but somethi
 Dato is a progressive webapp, which means that you can install it from the browser in computer and phones, and use it offline.
 
 
-**Versión proporcionada:** 1.7.2~ynh1
+**Versión proporcionada:** 1.7.4~ynh1
 
 **Demo:** <https://publicdato.eauchat.org/>
 
