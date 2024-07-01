@@ -5,7 +5,7 @@
 
 # YunoHost 上的 Dato
 
-[![集成程度](https://dash.yunohost.org/integration/dato.svg)](https://dash.yunohost.org/appci/app/dato) ![工作状态](https://ci-apps.yunohost.org/ci/badges/dato.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/dato.maintain.svg)
+[![集成程度](https://dash.yunohost.org/integration/dato.svg)](https://ci-apps.yunohost.org/ci/apps/dato/) ![工作状态](https://ci-apps.yunohost.org/ci/badges/dato.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/dato.maintain.svg)
 
 [![使用 YunoHost 安装 Dato](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=dato)
 
@@ -27,7 +27,7 @@ The purpose of dato is not to propose a UI specific to some purpose, but somethi
 Dato is a progressive webapp, which means that you can install it from the browser in computer and phones, and use it offline.
 
 
-**分发版本：** 1.7.2~ynh1
+**分发版本：** 1.7.4~ynh1
 
 **演示：** <https://publicdato.eauchat.org/>
 
