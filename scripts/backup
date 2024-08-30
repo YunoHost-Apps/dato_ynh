@@ -8,43 +8,40 @@
 source ../settings/scripts/_common.sh
 source /usr/share/yunohost/helpers
 
-#=================================================
-# DECLARE DATA AND CONF FILES TO BACKUP
-#=================================================
-ynh_print_info --message="Declaring files to be backed up..."
+ynh_print_info "Declaring files to be backed up..."
 
 #=================================================
 # BACKUP THE APP MAIN DIR
 #=================================================
 
-ynh_backup --src_path="$install_dir"
+ynh_backup "$install_dir"
 
 #=================================================
 # BACKUP THE SYSTEM CONFIGURATION
 #=================================================
 
-ynh_backup --src_path="/etc/nginx/conf.d/$domain.d/$app.conf"
+ynh_backup "/etc/nginx/conf.d/$domain.d/$app.conf"
 
-ynh_backup --src_path="/etc/logrotate.d/$app"
+ynh_backup "/etc/logrotate.d/$app"
 
-ynh_backup --src_path="/etc/systemd/system/$app.service"
+ynh_backup "/etc/systemd/system/$app.service"
 
 #=================================================
 # BACKUP VARIOUS FILES
 #=================================================
 
-ynh_backup --src_path="/var/log/$app/"
+ynh_backup "/var/log/$app/"
 
 if [[ "$autosynchronize" == true ]]; then
     # backup dato.ini config in couch
-    ynh_backup --src_path="/opt/couchdb/etc/local.d/$app.ini"
+    ynh_backup "/opt/couchdb/etc/local.d/$app.ini"
 
     # notify that couchdb users and dbs are left
-    ynh_print_warn --message="Please note that backing up dato doesn't backup the databases you created through it. To backup your data, you should backup the couchdb app."
+    ynh_print_warn "Please note that backing up dato doesn't backup the databases you created through it. To backup your data, you should backup the couchdb app."
 fi
 
 #=================================================
 # END OF SCRIPT
 #=================================================
 
-ynh_print_info --message="Backup script completed for $app. (YunoHost will then actually copy those files to the archive)."
+ynh_print_info "Backup script completed for $app. (YunoHost will then actually copy those files to the archive)."
