@@ -27,7 +27,6 @@ ynh_nodejs_install
 #=================================================
 ynh_script_progression "Setting up source files..."
 
-# Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source --dest_dir="$install_dir/sources"
 
 chmod -R o-rwx "$install_dir/sources"
@@ -39,8 +38,7 @@ chown -R "$app:www-data" "$install_dir/sources"
 ynh_script_progression "Building node dependencies..."
 
 pushd "$install_dir/sources"
-
-    ynh_hide_warnings ynh_exec_as_app node_load_PATH" npm install --loglevel warn
+    ynh_hide_warnings ynh_exec_as $app env $ynh_node_load_PATH $ynh_npm install --loglevel warn
 popd
 
 #=================================================

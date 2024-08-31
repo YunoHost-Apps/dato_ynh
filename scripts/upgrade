@@ -37,21 +37,17 @@ ynh_nodejs_install
 #=================================================
 ynh_script_progression "Upgrading source files..."
 
-# Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source --dest_dir="$install_dir/sources" --full_replace --keep="config"
 
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod -R o-rwx "$install_dir"
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown -R "$app:www-data" "$install_dir"
 #=================================================
 # BUILD NODE DEPENDENCIES
 #=================================================
 ynh_script_progression "Building node dependencies..."
 
 pushd "$install_dir/sources"
-
     ynh_safe_rm "$install_dir/node_modules/"
     ynh_safe_rm "$install_dir/package-lock.json"
-    ynh_hide_warnings ynh_exec_as_app node_load_PATH" npm install --loglevel warn
+    ynh_hide_warnings ynh_hide_warnings ynh_exec_as $app env $ynh_node_load_PATH $ynh_npm install --loglevel warn
 popd
 
 #=================================================
@@ -66,14 +62,11 @@ dato_setup_config_files
 #=================================================
 ynh_script_progression "Upgrading system configurations related to $app..."
 
-# Create a dedicated NGINX config
 ynh_config_add_nginx
 
-# Create a dedicated systemd config
 ynh_config_add_systemd
 yunohost service add "$app" --description="Data storage with a convenient and flexible interface" --log="/var/log/$app/$app.log"
 
-# Use logrotate to manage app-specific logfile(s)
 ynh_config_add_logrotate
 
 #=================================================
