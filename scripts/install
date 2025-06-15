@@ -13,21 +13,20 @@ source /usr/share/yunohost/helpers
 
 # Convert to true/false
 autosynchronize=$(bool_to_str "$autosynchronize")
-ynh_app_setting_set --app="$app" --key=autosynchronize --value="$autosynchronize"
+ynh_app_setting_set --key=autosynchronize --value="$autosynchronize"
 
 #=================================================
 # INSTALL NODEJS
 #=================================================
-ynh_script_progression --message="Installing NodeJS..." --weight=6
+ynh_script_progression "Installing NodeJS..."
 
-ynh_install_nodejs --nodejs_version="$nodejs_version"
+ynh_nodejs_install
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
-ynh_script_progression --message="Setting up source files..." --weight=2
+ynh_script_progression "Setting up source files..."
 
-# Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source --dest_dir="$install_dir/sources"
 
 chmod -R o-rwx "$install_dir/sources"
@@ -36,17 +35,16 @@ chown -R "$app:www-data" "$install_dir/sources"
 #=================================================
 # BUILD NODE DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Building node dependencies..." --weight=90
+ynh_script_progression "Building node dependencies..."
 
 pushd "$install_dir/sources"
-    ynh_use_nodejs
-    ynh_exec_warn_less ynh_exec_as "$app" "$ynh_node_load_PATH" "$ynh_npm" install --loglevel warn
+    ynh_hide_warnings ynh_exec_as $app env $ynh_node_load_PATH $ynh_npm install --loglevel warn
 popd
 
 #=================================================
 # ADD A CONFIGURATION
 #=================================================
-ynh_script_progression --message="Adding $app's configuration file..." --weight=3
+ynh_script_progression "Adding $app's configuration file..."
 
 dato_setup_config_files
 
@@ -59,10 +57,10 @@ if [[ $autosynchronize == true ]]; then
 	#=================================================
 	# CUSTOMIZE COUCHDB SETTINGS
 	#=================================================
-	ynh_script_progression --message="Customizing couch config..." --weight=2
+	ynh_script_progression "Customizing couch config..."
 
 	# make sure that couchdb has CORS enabled and that it accepts requests from dato domain
-	ynh_add_config --template="couch.ini" --destination="/opt/couchdb/etc/local.d/$app.ini"
+	ynh_config_add --template="couch.ini" --destination="/opt/couchdb/etc/local.d/$app.ini"
 
 	# restart couchdb service so that it takes into consideration the changes
 	yunohost service restart couchdb
@@ -70,7 +68,7 @@ if [[ $autosynchronize == true ]]; then
 	#=================================================
 	# SETUP A COUCHDB DATO ADMIN USER
 	#=================================================
-	ynh_script_progression --message="Setting up admin user in couch..." --weight=2
+	ynh_script_progression "Setting up admin user in couch..."
 
 	# figure out couch url with password
 	couch_pw_url=$(echo "$couch_url" | sed -En "s+^https?://+https://$couch_admin_name:$couch_admin_password@+p")
@@ -83,10 +81,10 @@ if [[ $autosynchronize == true ]]; then
 
 	# display error message if there was an error creating dato admin user in couch
 	if [[ $addDatoAdmin_curlResult != '{"ok":true'* ]]; then
-		ynh_print_err --message="There was an error creating the dato admin user for in couch. You will probably have to do it manually (check the last section of this page for instructions: https://squeak.eauchat.org/apps/dato/?setups)."
-		ynh_print_err --message="Here is the error message from couchdb:"
-		ynh_print_err --message="$addDatoAdmin_curlResult"
-		ynh_print_err --message="Please make sure that your couchdb instance is accessible from the url you provided, with a proper SSL certificate (not a self-signed one), otherwise you will not be able to login to dato!"
+		ynh_print_warn "There was an error creating the dato admin user for in couch. You will probably have to do it manually (check the last section of this page for instructions: https://squeak.eauchat.org/apps/dato/?setups)."
+		ynh_print_warn "Here is the error message from couchdb:"
+		ynh_print_warn "$addDatoAdmin_curlResult"
+		ynh_print_warn "Please make sure that your couchdb instance is accessible from the url you provided, with a proper SSL certificate (not a self-signed one), otherwise you will not be able to login to dato!"
 	fi
 
 	# modify _users db _security document
@@ -99,9 +97,9 @@ if [[ $autosynchronize == true ]]; then
 
 	# display error message if there was an error modifying _users db _security document
 	if [[ $usersSecDocChange_curlResult != '{"ok":true'* ]]; then
-		ynh_print_err --message="There was an error enabling dato users to access their user profile in couch. You will have to do it manually (check the 'Configure couchdb so that it accepts requests from dato' section in the following page for instructions: https://squeak.eauchat.org/apps/dato/?setups)."
-		ynh_print_err --message="Here is the error message from couchdb:"
-		ynh_print_err --message="$usersSecDocChange_curlResult"
+		ynh_print_warn "There was an error enabling dato users to access their user profile in couch. You will have to do it manually (check the 'Configure couchdb so that it accepts requests from dato' section in the following page for instructions: https://squeak.eauchat.org/apps/dato/?setups)."
+		ynh_print_warn "Here is the error message from couchdb:"
+		ynh_print_warn "$usersSecDocChange_curlResult"
 	fi
 
 fi
@@ -116,28 +114,28 @@ chown -R "$app:$app" "$install_dir/sources/dist" "$install_dir/sources/config"
 #=================================================
 # SYSTEM CONFIGURATION
 #=================================================
-ynh_script_progression --message="Adding system configurations related to $app..." --weight=1
+ynh_script_progression "Adding system configurations related to $app..."
 
 # Create a dedicated NGINX config
-ynh_add_nginx_config
+ynh_config_add_nginx
 
 # Create a dedicated systemd config
-ynh_add_systemd_config
+ynh_config_add_systemd
 yunohost service add "$app" --description="Data storage with a convenient and flexible interface" --log="/var/log/$app/$app.log"
 
 # Use logrotate to manage application logfile(s)
-ynh_use_logrotate
+ynh_config_add_logrotate
 
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting $app's systemd service..." --weight=60
+ynh_script_progression "Starting $app's systemd service..."
 
 # Start a systemd service
-ynh_systemd_action --service_name="$app" --action="start" --log_path="systemd" --line_match="electrode server listening on port" --timeout=600
+ynh_systemctl --service="$app" --action="start" --log_path="systemd" --wait_until="electrode server listening on port" --timeout=600
 
 #=================================================
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Installation of $app completed" --last
+ynh_script_progression "Installation of $app completed"
