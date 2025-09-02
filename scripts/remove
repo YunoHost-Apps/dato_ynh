@@ -29,10 +29,10 @@ ynh_remove_nginx_config
 #=================================================
 # REMOVE NODEJS
 #=================================================
-ynh_script_progression --message="Removing NodeJS..." --weight=13
+#REMOVEME? ynh_script_progression --message="Removing NodeJS..." --weight=13
 
 # Remove metapackage and its dependencies
-ynh_remove_nodejs
+#REMOVEME? ynh_remove_nodejs
 
 #=================================================
 # AUTOSYNCHRONIZED SPECIFICS
