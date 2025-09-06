@@ -1,11 +1,8 @@
 #!/bin/bash
 
 #=================================================
-# COMMON VARIABLES AND CUSTOM HELPERS
+# PERSONAL HELPERS
 #=================================================
-
-# nodejs version
-nodejs_version=12
 
 bool_to_str() {
     bool_str=(false true)
@@ -17,8 +14,6 @@ dato_setup_config_files() {
 
     # setup public dato config
     ynh_config_add --template="public.js" --destination="$install_dir/sources/config/public.js"
-    #REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod 400 "$install_dir/sources/config/public.js"
-    #REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown "$app:$app" "$install_dir/sources/config/public.js"
 
     # setup private dato config
     if [[ $autosynchronize == true ]]; then
@@ -26,6 +21,4 @@ dato_setup_config_files() {
     else
         ynh_config_add --template="private.js" --destination="$install_dir/sources/config/private.js"
     fi
-    #REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod 400 "$install_dir/sources/config/private.js"
-    #REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown "$app:$app" "$install_dir/sources/config/private.js"
 }
