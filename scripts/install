@@ -16,13 +16,6 @@ autosynchronize=$(bool_to_str "$autosynchronize")
 ynh_app_setting_set --app="$app" --key=autosynchronize --value="$autosynchronize"
 
 #=================================================
-# INSTALL NODEJS
-#=================================================
-#REMOVEME? ynh_script_progression --message="Installing NodeJS..." --weight=6
-
-#REMOVEME? ynh_install_nodejs --#REMOVEME? nodejs_version="$nodejs_version"
-
-#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression --message="Setting up source files..." --weight=2

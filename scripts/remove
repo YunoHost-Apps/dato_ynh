@@ -27,14 +27,6 @@ ynh_remove_logrotate
 ynh_remove_nginx_config
 
 #=================================================
-# REMOVE NODEJS
-#=================================================
-#REMOVEME? ynh_script_progression --message="Removing NodeJS..." --weight=13
-
-# Remove metapackage and its dependencies
-#REMOVEME? ynh_remove_nodejs
-
-#=================================================
 # AUTOSYNCHRONIZED SPECIFICS
 #=================================================
 
