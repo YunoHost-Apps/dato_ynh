@@ -1,4 +1,3 @@
-
 ## Configuration
 
 Cette application peut être personnalisée en modifiant le fichier `config/public.js` situé dans `/opt/yunohost/APPID/` (`APPID` devrait-être `dato` pour une première instance et puis, `dato__2`, `dato__3`... pour les suivantes).
@@ -12,7 +11,7 @@ Si vous voulez donner le droit à un utilisateur d'administrer (= d'ajouter/supp
 
 Si besoin, vous pouvez créer des liens pour permettre à un utilisateur de modifier son mot de passe. Il suffira alors d'envoyer ce lien manuellement à l'utilisateur.
 
-## Note sur dato
+## Note sur Dato
 
 Dato est une application web progressive (PWA). En deux mots, cela veut dire que les navigateurs gardent en cache l'application entière, afin de ne pas avoir à la demander au serveur à chaque visite.
 Cela permet de moins soliciter le serveur, et d'utiliser l'application en l'absence de connexion internet.
