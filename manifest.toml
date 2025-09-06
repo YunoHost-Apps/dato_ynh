@@ -19,11 +19,13 @@ code = "https://framagit.org/squeak/dato"
 website = "https://squeak.eauchat.org/dato"
 
 [integration]
-yunohost = ">= 11.2.10"
+yunohost = ">= 12.1.17"
 architectures = "all"
 multi_instance = true
+
 ldap = false
 sso = false
+
 disk = "50M"
 ram.build = "50M"
 ram.runtime = "50M"
@@ -114,3 +116,6 @@ ram.runtime = "50M"
 
     [resources.apt]
     packages = ["curl", "jq"]
+
+    [resources.nodejs]
+    version = "20"
