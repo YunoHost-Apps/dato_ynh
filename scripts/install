@@ -22,16 +22,13 @@ ynh_script_progression "Setting up source files..."
 
 ynh_setup_source --dest_dir="$install_dir/sources"
 
-chmod -R o-rwx "$install_dir/sources"
-chown -R "$app:www-data" "$install_dir/sources"
-
 #=================================================
 # BUILD NODE DEPENDENCIES
 #=================================================
 ynh_script_progression "Building node dependencies..."
 
 pushd "$install_dir/sources"
-    ynh_exec_warn_less ynh_exec_as_app npm install --loglevel warn
+    ynh_hide_warnings ynh_exec_as_app npm install --loglevel warn
 popd
 
 #=================================================
