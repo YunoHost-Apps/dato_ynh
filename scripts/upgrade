@@ -43,7 +43,7 @@ ynh_script_progression "Building node dependencies..."
 pushd "$install_dir/sources"
     ynh_safe_rm "$install_dir/node_modules/"
     ynh_safe_rm "$install_dir/package-lock.json"
-    ynh_hide_warnings ynh_hide_warnings ynh_exec_as $app env $ynh_node_load_PATH $ynh_npm install --loglevel warn
+    ynh_hide_warnings ynh_exec_as_app npm install --loglevel warn
 popd
 
 #=================================================
