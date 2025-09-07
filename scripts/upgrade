@@ -32,6 +32,9 @@ ynh_script_progression "Upgrading source files..."
 
 ynh_setup_source --dest_dir="$install_dir/sources" --full_replace --keep="config"
 
+chmod -R o-rwx "$install_dir/sources"
+chown -R "$app:www-data" "$install_dir/sources"
+
 #=================================================
 # BUILD NODE DEPENDENCIES
 #=================================================
