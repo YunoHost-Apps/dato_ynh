@@ -1,4 +1,3 @@
-
 ## Configuration
 
 To configure dato, you can edit the `config/public.js` file in the app directory that should be in `/opt/yunohost/APPID/` where `APPID` is `dato` if it's the first installed instance, `dato__2`, `dato__3`... for additional instances.
@@ -20,7 +19,7 @@ If you want a user to have administration rights (= to have the power to add/rem
 
 Also, if you need, you can make use of the password reset feature to allow users to modify their passwords, you will just need to send them the generated password reset link.
 
-## A note about dato
+## A note about Dato
 
 Please be aware that dato is a Progressive Web App. In a nutshell, this means that browsers cache the whole app, so it doesn't have to be requested to the server every time a user is visiting it.
 This lowers solicitation of the server, and also allow users to use dato offline.
