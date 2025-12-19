@@ -7,7 +7,7 @@ name = "Dato"
 description.en = "Store all kinds of data with an extremely customizable interface."
 description.fr = "Stockez tous types de données avec une interface complètement customizable."
 
-version = "1.8.0~ynh1"
+version = "1.8.5~ynh1"
 
 maintainers = ["Squeak"]
 
@@ -100,8 +100,8 @@ ram.runtime = "50M"
 
 [resources]
     [resources.sources.main]
-    url = "https://framagit.org/squeak/dato/-/archive/v1.8.0/dato-v1.8.0.tar.bz2"
-    sha256 = "92c7562000cbd56e9d69f59e3dae164ba6b921ffe1f1485f2a66888b2fc2e610"
+    url = "https://framagit.org/squeak/dato/-/archive/7a3d27a7eb1a53f1e3f38a26b3ca5a580732bd72/dato-7a3d27a7eb1a53f1e3f38a26b3ca5a580732bd72.tar.gz"
+    sha256 = "7760f874be8b2dd45838d62046ab6e1ee221aa326dabddcd23eed958c7406c1b"
 
     autoupdate.strategy = "latest_gitlab_release"
 
