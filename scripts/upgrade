@@ -41,8 +41,8 @@ chown -R "$app:www-data" "$install_dir/sources"
 ynh_script_progression "Building node dependencies..."
 
 pushd "$install_dir/sources"
-    ynh_safe_rm "$install_dir/node_modules/"
-    ynh_safe_rm "$install_dir/package-lock.json"
+    ynh_safe_rm "$install_dir/sources/node_modules/"
+    ynh_safe_rm "$install_dir/sources/package-lock.json"
     ynh_hide_warnings ynh_exec_as_app npm install --loglevel warn
 popd
 
