@@ -1,5 +1,5 @@
 
-module.exports = {
+export default {
 
   adminEmail: "__ADMIN_EMAIL__",
 

@@ -7,7 +7,7 @@ name = "Dato"
 description.en = "Store all kinds of data with an extremely customizable interface."
 description.fr = "Stockez tous types de données avec une interface complètement customizable."
 
-version = "1.8.5~ynh1"
+version = "2.1.1~ynh1"
 
 maintainers = ["Squeak"]
 
@@ -19,7 +19,7 @@ code = "https://framagit.org/squeak/dato"
 website = "https://squeak.eauchat.org/dato"
 
 [integration]
-yunohost = ">= 12.1.39"
+yunohost = ">= 12.1.38"
 helpers_version = "2.1"
 architectures = "all"
 multi_instance = true
@@ -100,8 +100,8 @@ ram.runtime = "50M"
 
 [resources]
     [resources.sources.main]
-    url = "https://framagit.org/squeak/dato/-/archive/7a3d27a7eb1a53f1e3f38a26b3ca5a580732bd72/dato-7a3d27a7eb1a53f1e3f38a26b3ca5a580732bd72.tar.gz"
-    sha256 = "7760f874be8b2dd45838d62046ab6e1ee221aa326dabddcd23eed958c7406c1b"
+    url = "https://framagit.org/squeak/dato/-/archive/v2.1.1/dato-v2.1.1.tar.bz2"
+    sha256 = "11152d44ca0baf1ff7afd4c9a838ab9d374fa434a6c1c68d406b0e37b601feec"
 
     autoupdate.strategy = "latest_gitlab_release"
 
@@ -119,4 +119,4 @@ ram.runtime = "50M"
     packages = ["curl", "jq"]
 
     [resources.nodejs]
-    version = "20"
+    version = "24"

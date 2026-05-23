@@ -41,8 +41,8 @@ chown -R "$app:www-data" "$install_dir/sources"
 ynh_script_progression "Building node dependencies..."
 
 pushd "$install_dir/sources"
-    ynh_safe_rm "$install_dir/node_modules/"
-    ynh_safe_rm "$install_dir/package-lock.json"
+    ynh_safe_rm "$install_dir/sources/node_modules/"
+    ynh_safe_rm "$install_dir/sources/package-lock.json"
     ynh_hide_warnings ynh_exec_as_app npm install --loglevel warn
 popd
 
@@ -52,6 +52,14 @@ popd
 ynh_script_progression "Updating $app's configuration file..."
 
 dato_setup_config_files
+
+if ynh_app_upgrading_from_version_before_or_equal_to 1.8.5~ynh1
+then
+    ynh_replace --match="module.exports =" --replace="export default" --file="$install_dir/sources/config/public.js"
+    ynh_store_file_checksum "$install_dir/sources/config/public.js"
+    ynh_replace --match="module.exports =" --replace="export default" --file="$install_dir/sources/config/private.js"
+    ynh_store_file_checksum "$install_dir/sources/config/private.js"
+fi
 
 #=================================================
 # REAPPLY SYSTEM CONFIGURATIONS
