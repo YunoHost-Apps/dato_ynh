@@ -1,5 +1,5 @@
 
-module.exports = {
+export default {
 
   // invert booleans in the following three lines for testing, development and modifications of the app
   production: true,
