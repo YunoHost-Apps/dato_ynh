@@ -100,8 +100,8 @@ ram.runtime = "50M"
 
 [resources]
     [resources.sources.main]
-    url = "https://framagit.org/squeak/dato/-/archive/1b21c0178ed17598d183feb8aba49ce050aef8f2/dato-1b21c0178ed17598d183feb8aba49ce050aef8f2.tar.gz"
-    sha256 = "26328289f69fa508e28cc28953e442cc8d5170cf553c74e3dcccdaa98b17492b"
+    url = "https://framagit.org/squeak/dato/-/archive/v2.1.1/dato-v2.1.1.tar.bz2"
+    sha256 = "11152d44ca0baf1ff7afd4c9a838ab9d374fa434a6c1c68d406b0e37b601feec"
 
     autoupdate.strategy = "latest_gitlab_release"
 
