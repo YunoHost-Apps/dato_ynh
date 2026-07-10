@@ -9,15 +9,12 @@ export default {
   port: "__PORT__",
 
   authentication: {
+    // the url to the couchdb server storing app users and databases
     couchUrl: "__COUCH_URL__",
+    // couch admin username and password (used to add/modify/remove users from /users/ page, and automatically add/remove databases for users)
+    couchAdminUsername: "__COUCH_ADMIN_NAME__",
+    couchAdminPassword: "__COUCH_ADMIN_PASSWORD__",
   },
-  couchAdminAuthentication: {
-    // couch admin user:
-    username: "__COUCH_ADMIN_NAME__",
-    // couch admin user's password:
-    password: "__COUCH_ADMIN_PASSWORD__",
-    // the url where your couchdb server is accessible from the internet:
-    customCouchUrl: "__COUCH_URL__",
-  },
+  autosynchronization: true,
 
 };
