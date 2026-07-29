@@ -21,4 +21,8 @@ dato_setup_config_files() {
     else
         ynh_config_add --template="private.js" --destination="$install_dir/sources/config/private.js"
     fi
+
+    # make sure private.js access rights are limited because it may contain sensitive information
+    chmod 600 "$install_dir/sources/config/private.js"
+
 }
